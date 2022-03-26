@@ -14,15 +14,17 @@ class CardDeck():
 
         suits_index = 0
 
-        for rank in self.ranks:
-            if trace: print(f"looping through rank: '{rank}'")
-    
+        for i in range(len(self.ranks)):
+            if trace: print(f"looping through rank: '{self.ranks[i]}' and value: '{self.values[i]}'")
+
+            # self.standard_deck.append([self.ranks[i], self.values[i]])
+
             for i in range(len(self.suits)):
                 
                 if suits_index <= len(self.suits):
                     if trace: print(f"looping through suit: '{self.suits[i]}'")
     
-                    self.standard_deck.append([rank, self.suits[i]])
+                    self.standard_deck.insert(2, self.suits[i])
         
                     suits_index += 1
     
@@ -30,6 +32,22 @@ class CardDeck():
                         suits_index -= 4
     
         print(self.standard_deck)
+
+        # for card in self.standard_deck:
+        #     for i in range(len(self.suits)):
+                
+        #         if suits_index <= len(self.suits):
+        #             if trace: print(f"looping through suit: '{self.suits[i]}'")
+    
+        #             card.insert(2, self.suits[suits_index])
+        
+        #             suits_index += 1
+    
+        #             if suits_index > 3:
+        #                 suits_index -= 4
+
+        # print(self.standard_deck)
+    
 
 
     def shuffle(self):
