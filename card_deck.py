@@ -48,6 +48,6 @@ class Deck():
 if __name__ == "__main__":
     deck = Deck()
     deck.shuffle()
-    deck.deal()
-    deck.reveal()
+    dealt_card = deck.deal()
+    dealt_card.display()
 
