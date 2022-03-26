@@ -3,18 +3,19 @@
 import random
 
 debug = True
-trace = True
+trace = False
 
 class Card():
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
 
+
     def display(self):
         print(f"'{self.rank}' of '{self.suit}'")
 
 
-class Deck():
+class Deck(Card):
     def __init__(self):
         ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
         suits = [1, 2, 3, 4]
@@ -39,15 +40,14 @@ class Deck():
     def deal(self):
         return self.copy_deck.pop()
 
-
-    def reveal(self):
-        for card in self.copy_deck:
-            card.display()
+    
+    def reveal(self, dealt_card):
+        dealt_card.display()
 
 
 if __name__ == "__main__":
     deck = Deck()
     deck.shuffle()
-    dealt_card = deck.deal()
-    dealt_card.display()
+    deck.deal()
+    print(f"card: {deck.reveal(deck.deal())}")
 
