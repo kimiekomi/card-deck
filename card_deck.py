@@ -40,12 +40,14 @@ class Deck():
         return self.copy_deck.pop()
 
 
-    def display(self):
-        for card in self.card_deck:
+    def reveal(self):
+        for card in self.copy_deck:
             card.display()
 
 
 if __name__ == "__main__":
     deck = Deck()
-    deck.display()
+    deck.shuffle()
+    deck.deal()
+    deck.reveal()
 
