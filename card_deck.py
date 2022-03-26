@@ -4,7 +4,9 @@ debug = True
 trace = True
 
 class Card():
-    pass
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
 
 class Deck():
 
@@ -30,7 +32,7 @@ def display_cards():
 
     for rank in ranks:
         if trace: print(f"looping through rank: '{rank}'")
-        
+
         for suit in suits:
             if trace: print(f"looping through suit: '{suit}'")
             cards.append([rank, suit])
