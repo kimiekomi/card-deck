@@ -10,8 +10,8 @@ class Card():
         self.rank = rank
         self.suit = suit
 
-    def __str__(self):
-        return f"'{self.rank}' of '{self.suit}'"
+    def display(self):
+        print(f"'{self.rank}' of '{self.suit}'")
 
 
 class Deck():
@@ -40,6 +40,12 @@ class Deck():
         return self.copy_deck.pop()
 
 
+    def display(self):
+        for card in self.card_deck:
+            card.display()
+
+
 if __name__ == "__main__":
     deck = Deck()
+    deck.display()
 
