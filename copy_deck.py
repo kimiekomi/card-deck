@@ -11,8 +11,20 @@ class Card():
         self.rank = rank
         self.suit = suit
         self.value = value
+
+
+    def compare_rank(self, card):
+        pass
         
 
+    def compare_suit(self, card):
+        pass
+
+
+    def compare_value(self, card):
+        pass
+
+    
     def __repr__(self):
         return f"'{self.rank}' of '{self.suit}', value: '{self.value}'"
 
@@ -54,27 +66,28 @@ class Deck():
                 card = Card(suit, rank, value)
                 self.deck.append(card)
 
-
+    def reset(self):
+        # builds deck from scratch...init calls reset, not shuffle
+        pass
+        
     def shuffle(self):
+        # make brand new deck
         random.shuffle(self.deck)
 
 
-    def deal_a_card(self):
+    def get_card(self):
         return self.deck.pop()
 
 
-    def len(self):
-        print(len(self.deck))
-
-    
     def is_empty(self):
-        if self.len() == 0: return True 
+        if len(self.deck) == 0: return True 
 
     
     def print(self):
         
         for card in self.deck:
             print(card)
+            
         
 if __name__ == "__main__":
     # ace_of_spades = Card("Spades", "Ace", 1)
@@ -91,16 +104,10 @@ if __name__ == "__main__":
 
     
     deck = Deck()
-
     # deck.print ()
 
     deck.shuffle()
-
     # deck.print()
 
-    # deck.len()
-    # deck.is_empty()
-
-    # while not deck.isEmpty():
-    #     print (deck.deal_a_card())
+    print (deck.get_card())
 
