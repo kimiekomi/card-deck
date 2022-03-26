@@ -32,11 +32,12 @@ class Deck():
 
 
     def shuffle(self):
-        random.shuffle(self.card_deck)
+        self.copy_deck = self.card_deck.copy()
+        random.shuffle(self.copy_deck)
 
 
     def deal(self):
-        pass
+        return self.copy_deck.pop()
 
 
 if __name__ == "__main__":
