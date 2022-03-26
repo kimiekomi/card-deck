@@ -62,9 +62,13 @@ class Deck():
     def deal_a_card(self):
         return self.deck.pop()
 
+
+    def len(self):
+        print(len(self.deck))
+
     
-    def isEmpty(self):
-        return True 
+    def is_empty(self):
+        if self.len() == 0: return True 
 
     
     def print(self):
@@ -94,6 +98,9 @@ if __name__ == "__main__":
 
     # deck.print()
 
-    while not deck.isEmpty():
-        print (deck.deal_a_card())
+    # deck.len()
+    # deck.is_empty()
+
+    # while not deck.isEmpty():
+    #     print (deck.deal_a_card())
 
