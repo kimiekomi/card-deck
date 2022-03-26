@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+import random
+
 debug = True
 trace = True
 
@@ -8,39 +10,35 @@ class Card():
         self.rank = rank
         self.suit = suit
 
-class Deck():
+    def __str__(self):
+        return f"'{self.rank}' of '{self.suit}'"
 
+
+class Deck():
     def __init__(self):
-        pass
+        ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        suits = [1, 2, 3, 4]
+        
+        self.card_deck = []
+
+        for rank in ranks:
+            if trace: print(f"looping through rank: '{rank}'")
+
+            for suit in suits:
+                if trace: print(f"looping through suit: '{suit}'")
+                
+                card = Card(rank, suit)
+                self.card_deck.append(card)
 
 
     def shuffle(self):
-        pass
+        random.shuffle(self.card_deck)
 
 
     def deal(self):
         pass
 
 
-def display_cards():
-    if debug: print("initialized display_cards()")
-    
-    ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    suits = [1, 2, 3, 4]
-
-    cards = []
-
-    for rank in ranks:
-        if trace: print(f"looping through rank: '{rank}'")
-
-        for suit in suits:
-            if trace: print(f"looping through suit: '{suit}'")
-            cards.append([rank, suit])
-
-    return cards
-    
-
-    
 if __name__ == "__main__":
-    print(display_cards())
+    deck = Deck()
 
