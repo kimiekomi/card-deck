@@ -13,10 +13,10 @@ class Deck():
         self.ranks = [Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King]
         self.suits = [Spades, Clubs, Hearts, Diamonds]
 
-        self.reset()
+        self.create_deck()
                 
 
-    def reset(self):
+    def create_deck(self):
           
         self.deck = []
         
@@ -48,7 +48,7 @@ class Deck():
         
         
     def shuffle(self):
-        random.shuffle(self.reset())
+        random.shuffle(self.create_deck())
 
 
     def get_card(self):
@@ -67,12 +67,12 @@ class Deck():
 
 if __name__ == "__main__":
     deck = Deck()
-    deck.print ()
+    # deck.print ()
 
     # deck.shuffle()
     # deck.print()
 
-    # deck.reset()
+    # deck.create_deck()
     # deck.print()
 
     # print(deck.get_card())
