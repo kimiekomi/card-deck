@@ -41,7 +41,7 @@ class Deck():
                 else:
                     value = int(rank)
 
-                card = Card(suit, rank, value)
+                card = Card(suit, rank, value, "up")
                 self.deck.append(card)
 
         return self.deck
@@ -52,6 +52,9 @@ class Deck():
 
 
     def get_card(self):
+        if len(self.deck) == 0:
+            return "Deck is empty"
+            
         return self.deck.pop()
 
 
@@ -67,7 +70,7 @@ class Deck():
 
 if __name__ == "__main__":
     deck = Deck()
-    # deck.print ()
+    deck.print ()
 
     # deck.shuffle()
     # deck.print()

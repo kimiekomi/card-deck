@@ -27,6 +27,27 @@ class WarGame():
         if trace: print(f"\nrival deck({len(self.rival_deck)}): {self.rival_deck}")
 
 
+    def lets_battle(self):
+        if debug: print("initialized lets_battle()")
+            
+        self.player_card = self.player_deck.get_card()
+        self.player_card.reveal_card()
+        
+        self.rival_card = self.rival_deck.get_card()
+        self.rival_card.reveal_card()
+
+        if self.player_card.greater_value(self.rival_card) == True:
+            if trace: print(f"value compare: {self.player_card.greater_value(self.rival_card)}")
+
+            self.player_deck
+
+        
+        
+
+        
+    # Elements: card face up/down, add card to bottom of deck, clear table
+
+
 if __name__ == "__main__":
     war_game()
     
