@@ -28,6 +28,11 @@ class Card():
         self.face = "up"
         return self.face
 
+
+    def conceal_card(self):
+        self.face = "down"
+        return self.face
+
         
     def same_suit(self, card):
         return self.suit == card.suit 
@@ -121,6 +126,8 @@ if __name__ == "__main__":
     # print(king_of_diamonds)
 
     ace_of_spades.reveal_card()
+    ace_of_spades.print()
+    ace_of_spades.conceal_card()
     ace_of_spades.print()
 
     # print(ace_of_spades.same_suit(two_of_spades))

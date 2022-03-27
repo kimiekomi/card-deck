@@ -36,13 +36,30 @@ class WarGame():
         self.rival_card = self.rival_deck.get_card()
         self.rival_card.reveal_card()
 
-        if self.player_card.greater_value(self.rival_card) == True:
+        if self.player_card.equal_value(self.rival_card):
+            self.lets_war()
+
+        else:
             if trace: print(f"value compare: {self.player_card.greater_value(self.rival_card)}")
+            
+            if self.player_card.greater_value(self.rival_card) == True:
+    
+                self.player_card.conceal_card()
+                self.player_deck.insert(0, self.player_card)
 
-            self.player_deck
+                self.rival_card.conceal_card()
+                self.rival_deck.insert(0, self.player_card)
+
+            else:
+                self.rival_card.conceal_card()
+                self.rival_deck.insert(0, self.rival_card)
+
+                self.player_card.conceal_card()
+                self.player_deck.insert(0, self.rival_card)
 
         
-        
+    def lets_war(self):
+        pass
 
         
     # Elements: card face up/down, add card to bottom of deck, clear table
