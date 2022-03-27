@@ -41,7 +41,7 @@ class Deck():
                 else:
                     value = int(rank)
 
-                card = Card(suit, rank, value, "up")
+                card = Card(suit, rank, value, "down")
                 self.deck.append(card)
 
         return self.deck
