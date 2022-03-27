@@ -12,6 +12,7 @@ class WarGame():
         self.rival_score = 26
 
         deck = Deck()
+        deck.shuffle()
 
         self.player_deck = []
         for i in range(self.player_score):
