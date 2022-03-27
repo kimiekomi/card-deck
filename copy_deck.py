@@ -13,16 +13,16 @@ class Card():
         self.value = value
 
 
-    def compare_rank(self, card):
-        pass
+    def compare_suit(self, card1, card2):
+        return card1.self.suit() == card2.self.suit() 
         
 
-    def compare_suit(self, card):
-        pass
+    def compare_rank(self, card1, card2):
+        return card1.self.rank() == card2.self.rank() 
 
 
-    def compare_value(self, card):
-        pass
+    def compare_value(self, card1, card2):
+        return card1.self.value() == card2.self.value() 
 
     
     def __repr__(self):
@@ -89,6 +89,10 @@ class Deck():
         
         for card in self.deck:
             print(card)
+
+
+class WarGame():
+    pass
             
         
 if __name__ == "__main__":
@@ -112,7 +116,7 @@ if __name__ == "__main__":
     # deck.print()
 
     deck.reset()
-    deck.print()
+    # deck.print()
 
-    # print (deck.get_card())
+    print (deck.get_card())
 
