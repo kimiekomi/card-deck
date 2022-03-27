@@ -27,7 +27,7 @@ class Deck():
                 if trace: print(f"looping through rank: '{rank}'")
 
                 if rank == Ace:
-                    value = 1
+                    value = 14
                 
                 elif rank == Jack:
                     value = 11

@@ -29,11 +29,15 @@ class WarGame():
 
     def lets_battle(self):
         if debug: print("initialized lets_battle()")
+
+        self.cards_on_table = []
             
         self.player_card = self.player_deck.get_card()
+        self.cards_on_table.append(self.player_card)
         self.player_card.reveal_card()
         
         self.rival_card = self.rival_deck.get_card()
+        self.cards_on_table.append(self.rival_card)
         self.rival_card.reveal_card()
 
         if self.player_card.equal_value(self.rival_card):
@@ -43,28 +47,56 @@ class WarGame():
             if trace: print(f"value compare: {self.player_card.greater_value(self.rival_card)}")
             
             if self.player_card.greater_value(self.rival_card) == True:
-    
-                self.player_card.conceal_card()
-                self.player_deck.insert(0, self.player_card)
 
-                self.rival_card.conceal_card()
-                self.rival_deck.insert(0, self.player_card)
+                for card in self.cards_on_table:
+                    card.conceal_card()
+                    self.player_deck.insert(0, card)
+
+                self.player_score += (len(cards_on_table) / 2)
+                self.rival_score -= (len(cards_on_table) / 2)
+
+                cards_on_table = []
 
             else:
-                self.rival_card.conceal_card()
-                self.rival_deck.insert(0, self.rival_card)
+                for card in self.cards_on_table:
+                    card.conceal_card()
+                    self.rival_deck.insert(0, card)
 
-                self.player_card.conceal_card()
-                self.player_deck.insert(0, self.rival_card)
+                self.rival_score += (len(cards_on_table) / 2)
+                self.player_score -= (len(cards_on_table) / 2)
+
+                cards_on_table = []
+
+            if trace: print(f"player score: {self.player_score}, rival score: {self.rival_score}")
 
         
     def lets_war(self):
-        pass
+        if debug: print("initialized lets_war()")
+
+        for i in range(2):
+            self.cards_on_table.append(self.player_deck.get_card())
+            
+        self.player_war4 = self.player_deck.get_card()
+        self.cards_on_table.append(self.player_war4)
+        self.player_war4.reveal_card()
+
+        if trace: print(f"player war-cards: {self.player_war1}, {self.player_war2}, {self.player_war3}, {self.player_war4}")
+        if trace: print(f"\nrival war-cards: {self.rival_war1}, {self.rival_war2}, {self.rival_war3}, {self.rival_war4}")
+
+        for i in range(2):
+            self.cards_on_table.append(self.rival_deck.get_card())
+            
+        self.rival_war4 = self.rival_deck.get_card()
+        self.cards_on_table.append(self.rival_war4)
+        self.rival_war4.reveal_card()
+
+        if trace: print(f"cards on table: {self.cards_on_table}")
+
+        if self.player_war4.equal_value(self.rival_war4):
+            
+        
 
         
-    # Elements: card face up/down, add card to bottom of deck, clear table
-
-
 if __name__ == "__main__":
     war_game()
     
