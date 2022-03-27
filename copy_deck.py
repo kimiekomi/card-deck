@@ -8,8 +8,8 @@ trace = False
 class Card():
 
     def __init__(self, suit, rank, value):
-        self.rank = rank
         self.suit = suit
+        self.rank = rank
         self.value = value
 
 
@@ -36,10 +36,14 @@ class Card():
 class Deck():
 
     def __init__(self):
-        ranks = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
-        suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
+        self.ranks = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
+        self.suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 
-        for rank in ranks:
+        self.reset()
+                
+
+    def reset(self):
+        for rank in self.ranks:
             if rank == "Ace":
                 value = 1
     
@@ -54,25 +58,23 @@ class Deck():
     
             else:
                 value = rank
-        
+                
         self.deck = []
-
-        for suit in suits:
+        
+        for suit in self.suits:
             if trace: print(f"looping through suit: '{suit}'")
 
-            for rank in ranks:
+            for rank in self.ranks:
                 if trace: print(f"looping through rank: '{rank}'")
-                
+
                 card = Card(suit, rank, value)
                 self.deck.append(card)
 
-    def reset(self):
-        # builds deck from scratch...init calls reset, not shuffle
-        pass
+        return self.deck
+        
         
     def shuffle(self):
-        # make brand new deck
-        random.shuffle(self.deck)
+        random.shuffle(self.reset())
 
 
     def get_card(self):
@@ -109,5 +111,8 @@ if __name__ == "__main__":
     deck.shuffle()
     # deck.print()
 
-    print (deck.get_card())
+    deck.reset()
+    deck.print()
+
+    # print (deck.get_card())
 
