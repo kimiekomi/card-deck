@@ -14,7 +14,7 @@ class Deck():
         self.suits = [Spades, Clubs, Hearts, Diamonds]
 
         self.create_deck()
-                
+
 
     def create_deck(self):
           
@@ -61,6 +61,10 @@ class Deck():
     def is_empty(self):
         if len(self.deck) == 0: return True 
 
+    
+    def __len__(self):
+        return len(self.deck)
+    
     
     def print(self):
         
