@@ -33,6 +33,18 @@ class Card():
         self.face = "down"
         return self.face
 
+
+    def __lt__(self):
+        pass
+
+
+    def __eq__(self):
+        pass
+
+
+    def __gt__(self):
+        pass
+
         
     def same_suit(self, card):
         return self.suit == card.suit 
