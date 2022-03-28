@@ -25,12 +25,12 @@ class Card():
 
 
     def reveal_card(self):
-        self.face = "up"
+        self.face = 1
         return self.face
 
 
     def conceal_card(self):
-        self.face = "down"
+        self.face = 0
         return self.face
 
 
@@ -83,8 +83,8 @@ class Card():
 
     
     def __repr__(self):
+
         if self.face == "down":
-            
             return f"_ of _, value: _"
              
         if self.suit == Spades:
