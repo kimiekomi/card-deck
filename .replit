@@ -1,2 +1,1 @@
-language = "undefined"
-run = ""
+run = "python3 war_game.py"

@@ -3,10 +3,11 @@
 from card_class import *
 from deck_class import *
 
-debug = True
+debug = False
 trace = False
 
 class WarGame():
+
     def __init__(self):
         self.player_score = 26
         self.computer_score = 26
@@ -67,6 +68,7 @@ class WarGame():
                 
         
     def lets_war(self):
+
         if debug: print("initialized lets_war()")
 
         while True:
@@ -95,6 +97,7 @@ class WarGame():
             
         
     def clear_table(self, player_card, computer_card):
+
         if debug: print("initialized clear_table()")
 
         if player_card.greater_value(computer_card) == True:
@@ -127,6 +130,7 @@ class WarGame():
         
 
     def keep_going(self):
+
         if debug: print("initialized keep_going()")
 
         while True:
