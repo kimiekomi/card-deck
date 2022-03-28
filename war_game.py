@@ -54,11 +54,13 @@ class WarGame():
     
                 self.clear_table(self.player_battle_card, self.computer_battle_card)
             
-            if self.player_score == 0:
-                print("Game Over...Computer Won War")
+            if self.player_score <= 24:
+                print("\n>>>Game Over...Computer Won War")
+                break
 
-            elif self.computer_score == 0:
-                print("Game Over...Player Won War")
+            elif self.computer_score <= 24:
+                print("\n>>>Game Over...Player Won War")
+                break
                 
             else:
                 self.keep_going()
@@ -125,17 +127,20 @@ class WarGame():
         
 
     def keep_going(self):
-        while True: 
-            response = input("Reveal another card? ")
-    
-            if response[0].lower == "y":
-                self.lets_battle()
-                continue
-                
-            else:    
-                print("\nGame Over...You Surrendered")
+        if debug: print("initialized keep_going()")
+
+        while True:
+            self.lets_battle()
+            
+            response = input("\nReveal another card? ")
+
+            if response[0].lower != "y":
                 break
-                
+
+            print("\n")
+
+        print("\n>>>Game Over...You Surrendered")
+
 
 if __name__ == "__main__":
     war_game = WarGame()
