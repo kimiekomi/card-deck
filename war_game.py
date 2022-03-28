@@ -9,7 +9,7 @@ trace = True
 class WarGame():
     def __init__(self):
         self.player_score = 26
-        self.rival_score = 26
+        self.computer_score = 26
 
         deck = Deck()
         deck.shuffle()
@@ -20,73 +20,90 @@ class WarGame():
 
         if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}")
 
-        self.rival_deck = []
-        for i in range(self.rival_score):
-            self.rival_deck.append(deck.get_card())
+        self.computer_deck = []
+        for i in range(self.computer_score):
+            self.computer_deck.append(deck.get_card())
 
-        if trace: print(f"\nrival deck({len(self.rival_deck)}): {self.rival_deck}")
+        if trace: print(f"\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
 
 
     def lets_battle(self):
         if debug: print("initialized lets_battle()")
 
-        self.cards_on_table = []
+        while True:
+            self.cards_on_table = []
+                
+            self.player_battle_card = self.player_deck.pop()
+            self.cards_on_table.append(self.player_battle_card)
+            self.player_battle_card.reveal_card()
             
-        self.player_battle = self.player_deck.pop()
-        self.cards_on_table.append(self.player_battle)
-        self.player_battle.reveal_card()
+            self.computer_battle_card = self.computer_deck.pop()
+            self.cards_on_table.append(self.computer_battle_card)
+            self.computer_battle_card.reveal_card()
+    
+            if self.player_battle_card.equal_value(self.computer_battle_card):
+                if trace: print("cards have equal value...time to war")
+                self.lets_war()
+    
+            else:
+                if trace: print(f"cards have different values")
+    
+                self.clear_table(self.player_battle_card, self.computer_battle_card)
+            
+            self.cards_on_table = []
+
+            if trace: print(f"cards on table: {self.cards_on_table}")
+
+            if self.player_score == 0:
+                print("Game Over...Computer Won")
+
+            elif self.computer_score == 0:
+                print("Game Over...Player Won")
+                
+            else:
+                response = input("Reveal another card? ")
         
-        self.rival_battle = self.rival_deck.pop()
-        self.cards_on_table.append(self.rival_battle)
-        self.rival_battle.reveal_card()
-
-        if self.player_battle.equal_value(self.rival_battle):
-            if trace: print("cards have equal value...time to war")
-            self.lets_war()
-
-        else:
-            if trace: print(f"cards have different values")
-
-            self.clear_table(self.player_battle, self.rival_battle)
-            
-        cards_on_table = []
-
+                if response[0].lower == "y":
+                    continue
+                    
+                else:    
+                    print("\nYou lost the war by forfeiture")
+                    break
+                
         
     def lets_war(self):
         if debug: print("initialized lets_war()")
 
         while True:
             for i in range(2):
-                self.cards_on_table.append(self.player_deck.get_card())
+                self.cards_on_table.append(self.player_deck.pop())
                 
-            self.player_war4 = self.player_deck.get_card()
-            self.cards_on_table.append(self.player_war4)
-            self.player_war4.reveal_card()
-    
-            if trace: print(f"player war-cards: {self.player_war1}, {self.player_war2}, {self.player_war3}, {self.player_war4}")
+            self.player_war_card = self.player_deck.pop()
+            self.cards_on_table.append(self.player_war_card)
+            self.player_war_card.reveal_card()
     
             for i in range(2):
-                self.cards_on_table.append(self.rival_deck.get_card())
+                self.cards_on_table.append(self.computer_deck.pop())
                 
-            self.rival_war4 = self.rival_deck.get_card()
-            self.cards_on_table.append(self.rival_war4)
-            self.rival_war4.reveal_card()
+            self.computer_war_card = self.computer_deck.pop()
+            self.cards_on_table.append(self.computer_war_card)
+            self.computer_war_card.reveal_card()
 
-            if trace: print(f"\nrival war-cards: {self.rival_war1}, {self.rival_war2}, {self.rival_war3}, {self.rival_war4}")
-    
             if trace: print(f"cards on table: {len(self.cards_on_table)}")
     
-            if self.player_war4.equal_value(self.rival_war4):
+            if self.player_war_card.equal_value(self.computer_war_card):
                 if trace: print("cards have equal value...time to war")
                 continue
 
-            self.clear_table(self.player_war4, self.rival_war4)
+            self.clear_table(self.player_war_card, self.computer_war_card)
             
         
-    def clear_table(self, player_card, rival_card):
+    def clear_table(self, player_card, computer_card):
         if debug: print("initialized clear_table()")
-            
-        if player_card.greater_value(rival_card) == True:
+
+        if trace: print(f"player card: {player_card} \ncomputer card: {computer_card}")
+
+        if player_card.greater_value(computer_card) == True:
             if trace: print("player card is higher")
 
             for card in self.cards_on_table:
@@ -94,21 +111,21 @@ class WarGame():
                 self.player_deck.insert(0, card)
 
             self.player_score += (len(self.cards_on_table) / 2)
-            self.rival_score -= (len(self.cards_on_table) / 2)
+            self.computer_score -= (len(self.cards_on_table) / 2)
 
         else:
-            if trace: print("rival card is higher")
+            if trace: print("computer card is higher")
             
             for card in self.cards_on_table:
                 card.conceal_card()
-                self.rival_deck.insert(0, card)
+                self.computer_deck.insert(0, card)
 
-            self.rival_score += (len(self.cards_on_table) / 2)
+            self.computer_score += (len(self.cards_on_table) / 2)
             self.player_score -= (len(self.cards_on_table) / 2)
 
         if trace: print(f"cards on table: {len(self.cards_on_table)}")
 
-        if trace: print(f"player score: {self.player_score}, rival score: {self.rival_score}")
+        if trace: print(f"player score: {self.player_score}, computer score: {self.computer_score}")
 
         
 if __name__ == "__main__":
