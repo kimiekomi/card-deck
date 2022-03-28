@@ -16,17 +16,14 @@ class WarGame():
         deck.shuffle()
 
         self.player_deck = []
+        self.computer_deck = []
 
         for i in range(self.player_score):
             self.player_deck.append(deck.get_card())
-
-        if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}")
-
-        self.computer_deck = []
-        
-        for i in range(self.computer_score):
             self.computer_deck.append(deck.get_card())
 
+        if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}")
+        
         if trace: print(f"\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
 
 
@@ -75,11 +72,10 @@ class WarGame():
 
             response = input("\nReveal another card? ")
 
-            if response[0].lower == "y":
-                continue
+            if response[0].lower() != "y":
+                print("\n>>> Game Over...You Surrendered")
+                break
     
-        print("\n>>> Game Over...You Surrendered")
-                
         
     def lets_war(self):
 
@@ -89,28 +85,24 @@ class WarGame():
         
             for i in range(2):
                 if len(self.player_deck) == 0:
-                    print(">>> Game Over...Empty Deck-Computer Won")
                     break
 
                 self.cards_on_table.append(self.player_deck.pop())
 
                 if len(self.computer_deck) == 0:
-                    print(">>> Game Over...Empty Deck-Player Won")
                     break
                     
                 self.cards_on_table.append(self.computer_deck.pop())
             
             if len(self.player_deck) == 0:
-                    print(">>> Game Over...Empty Deck-Computer Won")
-                    break
+                break
                 
             player_war_card = self.player_deck.pop()
             self.cards_on_table.append(player_war_card)
             player_war_card.reveal_card()
 
             if len(self.computer_deck) == 0:
-                    print(">>> Game Over...Empty Deck-Player Won")
-                    break
+                break
                 
             computer_war_card = self.computer_deck.pop()
             self.cards_on_table.append(computer_war_card)
