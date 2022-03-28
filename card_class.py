@@ -84,7 +84,7 @@ class Card():
     
     def __repr__(self):
 
-        if self.face == "down":
+        if self.face == 0:
             return f"_ of _, value: _"
              
         if self.suit == Spades:

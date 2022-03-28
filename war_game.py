@@ -66,12 +66,19 @@ class WarGame():
                 self.clear_table(self.player_battle_card, self.computer_battle_card)
             
             if self.player_score <= 0:
-                print("\n>>>Game Over...Computer Won War")
+                print("\n>>> Game Over...Computer Won War")
                 break
 
             if self.computer_score <= 0:
-                print("\n>>>Game Over...Player Won War")
+                print("\n>>> Game Over...Player Won War")
                 break
+
+            response = input("\nReveal another card? ")
+
+            if response[0].lower == "y":
+                continue
+    
+        print("\n>>> Game Over...You Surrendered")
                 
         
     def lets_war(self):
@@ -82,19 +89,19 @@ class WarGame():
         
             for i in range(2):
                 if len(self.player_deck) == 0:
-                    print(">>>Game Over...Computer Won War")
+                    print(">>> Game Over...Empty Deck-Computer Won")
                     break
 
                 self.cards_on_table.append(self.player_deck.pop())
 
                 if len(self.computer_deck) == 0:
-                    print(">>>Game Over...Player Won War")
+                    print(">>> Game Over...Empty Deck-Player Won")
                     break
                     
                 self.cards_on_table.append(self.computer_deck.pop())
             
             if len(self.player_deck) == 0:
-                    print(">>>Game Over...Computer Won War")
+                    print(">>> Game Over...Empty Deck-Computer Won")
                     break
                 
             player_war_card = self.player_deck.pop()
@@ -102,7 +109,7 @@ class WarGame():
             player_war_card.reveal_card()
 
             if len(self.computer_deck) == 0:
-                    print(">>>Game Over...Player Won War")
+                    print(">>> Game Over...Empty Deck-Player Won")
                     break
                 
             computer_war_card = self.computer_deck.pop()
@@ -149,15 +156,7 @@ class WarGame():
         self.cards_on_table = []
         
         if trace: print(f"cards on table: {len(self.cards_on_table)}")
-
-        response = input("\nReveal another card? ")
-
-        if response[0].lower != "y":
-            self.play_game()
-
-        else:
-            print("\n>>>Game Over...You Surrendered")
-        
+                
 
 if __name__ == "__main__":
     war_game = WarGame()
