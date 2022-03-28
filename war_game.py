@@ -4,7 +4,7 @@ from card_class import *
 from deck_class import *
 
 debug = True
-trace = True
+trace = False
 
 class WarGame():
     def __init__(self):
@@ -28,9 +28,10 @@ class WarGame():
 
 
     def lets_battle(self):
-        if debug: print("initialized lets_battle()")
 
         while True:
+            if debug: print("initialized lets_battle()")
+            
             self.cards_on_table = []
                 
             self.player_battle_card = self.player_deck.pop()
@@ -40,35 +41,27 @@ class WarGame():
             self.computer_battle_card = self.computer_deck.pop()
             self.cards_on_table.append(self.computer_battle_card)
             self.computer_battle_card.reveal_card()
-    
+
+            print(f"player card: {self.player_battle_card} \ncomputer card: {self.computer_battle_card}")
+
             if self.player_battle_card.equal_value(self.computer_battle_card):
-                if trace: print("cards have equal value...time to war")
+                if trace: print("cards have equal value...time for war")
+                    
                 self.lets_war()
     
             else:
-                if trace: print(f"cards have different values")
+                if trace: print("cards have different values")
     
                 self.clear_table(self.player_battle_card, self.computer_battle_card)
             
-            self.cards_on_table = []
-
-            if trace: print(f"cards on table: {self.cards_on_table}")
-
             if self.player_score == 0:
-                print("Game Over...Computer Won")
+                print("Game Over...Computer Won War")
 
             elif self.computer_score == 0:
-                print("Game Over...Player Won")
+                print("Game Over...Player Won War")
                 
             else:
-                response = input("Reveal another card? ")
-        
-                if response[0].lower == "y":
-                    continue
-                    
-                else:    
-                    print("\nYou lost the war by forfeiture")
-                    break
+                self.keep_going()
                 
         
     def lets_war(self):
@@ -92,19 +85,18 @@ class WarGame():
             if trace: print(f"cards on table: {len(self.cards_on_table)}")
     
             if self.player_war_card.equal_value(self.computer_war_card):
-                if trace: print("cards have equal value...time to war")
+                if trace: print("cards have equal value...time for war")
                 continue
 
             self.clear_table(self.player_war_card, self.computer_war_card)
+            self.keep_going()
             
         
     def clear_table(self, player_card, computer_card):
         if debug: print("initialized clear_table()")
 
-        if trace: print(f"player card: {player_card} \ncomputer card: {computer_card}")
-
         if player_card.greater_value(computer_card) == True:
-            if trace: print("player card is higher")
+            print("player card is higher")
 
             for card in self.cards_on_table:
                 card.conceal_card()
@@ -114,7 +106,7 @@ class WarGame():
             self.computer_score -= (len(self.cards_on_table) / 2)
 
         else:
-            if trace: print("computer card is higher")
+            print("computer card is higher")
             
             for card in self.cards_on_table:
                 card.conceal_card()
@@ -125,9 +117,26 @@ class WarGame():
 
         if trace: print(f"cards on table: {len(self.cards_on_table)}")
 
-        if trace: print(f"player score: {self.player_score}, computer score: {self.computer_score}")
+        print(f"player score: {self.player_score}, computer score: {self.computer_score}")
 
+        self.cards_on_table = []
         
+        if trace: print(f"cards on table: {len(self.cards_on_table)}")
+        
+
+    def keep_going(self):
+        while True: 
+            response = input("Reveal another card? ")
+    
+            if response[0].lower == "y":
+                self.lets_battle()
+                continue
+                
+            else:    
+                print("\nGame Over...You Surrendered")
+                break
+                
+
 if __name__ == "__main__":
     war_game = WarGame()
     war_game.lets_battle()
