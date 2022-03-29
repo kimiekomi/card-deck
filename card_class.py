@@ -50,24 +50,8 @@ class Card():
         return self.suit == card.suit 
         
 
-    def compare_rank(self, card):
-        return self.rank - card.rank 
-
-
     def compare_value(self, card):
         return self.value - card.value
-
-
-    def greater_rank(self, card):
-        return self.rank > card.rank
-
-
-    def equal_rank(self, card):
-        return self.rank == card.rank
-
-
-    def lesser_rank(self, card):
-        return self.rank < card.rank
 
 
     def greater_value(self, card):
