@@ -54,19 +54,16 @@ class WarGame():
                 self.lets_war()
                 continue
     
-            else:
-                if trace: print("*** time for battle ***")
-    
-                self.clear_table(player_battle_card, computer_battle_card)
+            if trace: print("*** time for battle ***")
+
+            self.clear_table(player_battle_card, computer_battle_card)
 
         
         if len(self.player_deck) == 0:
-            print("player deck empty")
-            print("\n>>> Game Over...Computer Won War")
+            print("player deck empty\n\n>>> Game Over...Computer Won War\n")
 
         else:
-            print("computer deck empty")
-            print("\n>>> Game Over...Player Won War")
+            print("computer deck empty\n\n>>> Game Over...Player Won War\n")
 
         
     def lets_war(self):
