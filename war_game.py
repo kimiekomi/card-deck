@@ -15,13 +15,14 @@ class WarGame():
 
         game_deck = []
         
-        for i in range(12):
+        for i in range(16):
             game_deck.append(deck.get_card())
 
         if trace: print(f"game deck({len(game_deck)}): {game_deck}")
 
         self.player_deck = []
         self.computer_deck = []
+        self.cards_on_table = []
 
         while len(game_deck) > 0:
             self.player_deck.insert(0, game_deck.pop())
@@ -37,33 +38,33 @@ class WarGame():
         while len(self.player_deck) != 0 and len(self.computer_deck) != 0:
             if debug: print("\nplay()")
             
-            self.cards_on_table = []
-
             player_battle_card = self.player_deck.pop()
             self.cards_on_table.append(player_battle_card)
 
             computer_battle_card = self.computer_deck.pop()
             self.cards_on_table.append(computer_battle_card)
 
-            print(f"player card: {player_battle_card} \ncomputer card: {computer_battle_card}")
+            print(f"player card: {player_battle_card}\ncomputer card: {computer_battle_card}")
 
             if player_battle_card.equal_value(computer_battle_card):
-                if trace: print("cards have equal value...time for war")
+                if trace: print("*cards have equal value...time for war*")
                     
                 self.lets_war()
+                continue
     
             else:
-                if trace: print("cards have different values")
+                if trace: print("*cards have different values*")
     
                 self.clear_table(player_battle_card, computer_battle_card)
+                continue
             
         if len(self.player_deck) == 0:
+            print("Player Deck Empty")
             print("\n>>> Game Over...Computer Won War")
-            break
 
-        if len(self.computer_deck) == 0:
+        else:
+            print("Computer Deck Empty")
             print("\n>>> Game Over...Player Won War")
-            break
 
             # response = input("\nReveal another card? ")
 
@@ -76,35 +77,32 @@ class WarGame():
 
         if debug: print("lets_war()")
 
-        while True:
-        
-            for i in range(3):
-                if len(self.player_deck) == 0:
-                    break
-
-                self.cards_on_table.append(self.player_deck.pop())
-
-                if len(self.computer_deck) == 0:
-                    break
-                    
-                self.cards_on_table.append(self.computer_deck.pop())
+        for i in range(3):
             
-            if len(self.player_deck) == 0 or len(self.computer_deck) == 0:
-                break
+            while len(self.player_deck) != 0 and len(self.computer_deck) != 0:
+                self.cards_on_table.append(self.player_deck.pop())
+                self.cards_on_table.append(self.computer_deck.pop())
+
+        if trace: print(f"cards on table({len(self.cards_on_table)}): {self.cards_on_table}")
+
+        return
+            
+            # if len(self.player_deck) == 0 or len(self.computer_deck) == 0:
+            #     break
                 
-            player_war_card = self.player_deck.pop()
-            self.cards_on_table.append(player_war_card)
+            # player_war_card = self.player_deck.pop()
+            # self.cards_on_table.append(player_war_card)
 
-            computer_war_card = self.computer_deck.pop()
-            self.cards_on_table.append(computer_war_card)
+            # computer_war_card = self.computer_deck.pop()
+            # self.cards_on_table.append(computer_war_card)
 
-            if trace: print(f"cards on table: {len(self.cards_on_table)}")
+            # if trace: print(f"cards on table: {len(self.cards_on_table)}")
     
-            if player_war_card.equal_value(computer_war_card):
-                if trace: print("cards have equal value...time for war")
-                continue
+            # if player_war_card.equal_value(computer_war_card):
+            #     if trace: print("cards have equal value...time for war")
+            #     continue
 
-            self.clear_table(player_war_card, computer_war_card)
+            # self.clear_table(player_war_card, computer_war_card)
             
         
     def clear_table(self, player_card, computer_card):
@@ -112,13 +110,13 @@ class WarGame():
         if debug: print("clear_table()")
 
         if player_card.greater_value(computer_card) == True:
-            print("player card is higher")
+            print("<player card is higher>")
 
             for card in self.cards_on_table:
                 self.player_deck.insert(0, card)
 
         else:
-            print("computer card is higher")
+            print("<computer card is higher>")
             
             for card in self.cards_on_table:
                 self.computer_deck.insert(0, card)
@@ -131,10 +129,10 @@ class WarGame():
 
         self.cards_on_table = []
         
-        if trace: print(f"cards on table: {len(self.cards_on_table)}")
+        if trace: print(f"table cleared: {len(self.cards_on_table)} cards on table")
                 
 
 if __name__ == "__main__":
     war_game = WarGame()
-    # war_game.play()
+    war_game.play()
 
