@@ -15,7 +15,7 @@ class WarGame():
 
         game_deck = []
         
-        for i in range(16):
+        for i in range(20):
             game_deck.append(deck.get_card())
 
         if trace: print(f"game deck({len(game_deck)}): {game_deck}")
@@ -46,24 +46,26 @@ class WarGame():
 
             print(f"player card: {player_battle_card}\ncomputer card: {computer_battle_card}")
 
+            if trace: print(f"cards on table({len(self.cards_on_table)}): {self.cards_on_table}")
+
             if player_battle_card.equal_value(computer_battle_card):
-                if trace: print("*cards have equal value...time for war*")
+                if trace: print("*** time for war ***")
                     
                 self.lets_war()
                 continue
     
             else:
-                if trace: print("*cards have different values*")
+                if trace: print("*** time for battle ***")
     
                 self.clear_table(player_battle_card, computer_battle_card)
-                continue
-            
+
+        
         if len(self.player_deck) == 0:
-            print("Player Deck Empty")
+            print("player deck empty")
             print("\n>>> Game Over...Computer Won War")
 
         else:
-            print("Computer Deck Empty")
+            print("computer deck empty")
             print("\n>>> Game Over...Player Won War")
 
             # response = input("\nReveal another card? ")
@@ -79,7 +81,7 @@ class WarGame():
 
         for i in range(3):
             
-            while len(self.player_deck) != 0 and len(self.computer_deck) != 0:
+            if len(self.player_deck) != 0 and len(self.computer_deck) != 0:
                 self.cards_on_table.append(self.player_deck.pop())
                 self.cards_on_table.append(self.computer_deck.pop())
 
@@ -121,16 +123,14 @@ class WarGame():
             for card in self.cards_on_table:
                 self.computer_deck.insert(0, card)
 
-        if trace: print(f"cards on table({len(self.cards_on_table)}): {self.cards_on_table}")
-
-        if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
-
-        print(f"player score: {len(self.player_deck)}, computer score: {len(self.computer_deck)}")
-
         self.cards_on_table = []
         
         if trace: print(f"table cleared: {len(self.cards_on_table)} cards on table")
-                
+
+        print(f"player score: {len(self.player_deck)}, computer score: {len(self.computer_deck)}")
+        
+        if trace: print(f"\nplayer deck({len(self.player_deck)}): {self.player_deck}\n\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
+
 
 if __name__ == "__main__":
     war_game = WarGame()
