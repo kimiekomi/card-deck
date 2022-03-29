@@ -68,12 +68,6 @@ class WarGame():
             print("computer deck empty")
             print("\n>>> Game Over...Player Won War")
 
-            # response = input("\nReveal another card? ")
-
-            # if response[0].lower() != "y":
-            #     print("\n>>> Game Over...You Surrendered")
-            #     break
-    
         
     def lets_war(self):
 
@@ -88,23 +82,6 @@ class WarGame():
         if trace: print(f"cards on table({len(self.cards_on_table)}): {self.cards_on_table}")
 
         return
-            
-            # if len(self.player_deck) == 0 or len(self.computer_deck) == 0:
-            #     break
-                
-            # player_war_card = self.player_deck.pop()
-            # self.cards_on_table.append(player_war_card)
-
-            # computer_war_card = self.computer_deck.pop()
-            # self.cards_on_table.append(computer_war_card)
-
-            # if trace: print(f"cards on table: {len(self.cards_on_table)}")
-    
-            # if player_war_card.equal_value(computer_war_card):
-            #     if trace: print("cards have equal value...time for war")
-            #     continue
-
-            # self.clear_table(player_war_card, computer_war_card)
             
         
     def clear_table(self, player_card, computer_card):
