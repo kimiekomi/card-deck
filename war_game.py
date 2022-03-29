@@ -2,21 +2,20 @@
 
 from card_class import *
 from deck_class import *
+from card_game import CardGame
 
-debug = True
-trace = True
+debug = False
+trace = False
 
-class WarGame():
+class WarGame(CardGame):
 
     def __init__(self):
+        super().__init__()
         
-        deck = Deck()
-        deck.shuffle()
-
         game_deck = []
         
         for i in range(20):
-            game_deck.append(deck.get_card())
+            game_deck.append(self.deck.get_card())
 
         if trace: print(f"game deck({len(game_deck)}): {game_deck}")
 
@@ -47,9 +46,9 @@ class WarGame():
             computer_battle_card = self.computer_deck.pop()
             self.cards_on_table.append(computer_battle_card)
 
-            print(f"player card: {player_battle_card}\ncomputer card: {computer_battle_card}")
+            if trace: print(f"player card: {player_battle_card}\ncomputer card: {computer_battle_card}")
 
-            if player_battle_card.equal_value(computer_battle_card):
+            if player_battle_card == computer_battle_card:
                 if trace: print("*** time for war ***")
                     
                 self.lets_war()
@@ -89,7 +88,7 @@ class WarGame():
 
         if debug: print("lets_battle()")
 
-        if player_card.greater_value(computer_card) == True:
+        if player_card > computer_card:
             print("<player card is higher>")
 
             for card in self.cards_on_table:

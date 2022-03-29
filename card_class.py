@@ -5,22 +5,26 @@ import random
 debug = True
 trace = False
 
-Ace = 14
-Jack = 11
-Queen = 12
+Ace = 1
 King = 13
+Queen = 12
+Jack = 11
 
 Spades = 1
 Clubs = 2
 Hearts = 3
 Diamonds = 4
 
-class Card():
+class Card:
 
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
         self.value = rank
+
+        if self.value == Ace:
+            self.value += 13
+            
         self.face = True
 
 
@@ -34,32 +38,32 @@ class Card():
         return self.face
 
 
-    def __lt__(self):
-        pass
-
-
-    def __eq__(self):
-        pass
-
-
-    def __gt__(self):
-        pass
-
-        
-    def same_suit(self, card):
-        return self.suit == card.suit 
+    def __lt__(self, other):
+        return self.value < other.value
         
 
-    def compare_value(self, card):
-        return self.value - card.value
+    def __eq__(self, other):
+        return self.value == other.value
 
 
-    def greater_value(self, card):
-        return self.value > card.value
+    def __gt__(self, other):
+        return self.value > other.value
+
+        
+    def same_suit(self, other):
+        return self.suit == other.suit 
+        
+
+    # def compare_value(self, card):
+    #     return self.value - card.value
 
 
-    def equal_value(self, card):
-        return self.value == card.value
+    # def greater_value(self, card):
+    #     return self.value > card.value
+
+
+    # def equal_value(self, card):
+    #     return self.value == card.value
 
 
     def lesser_value(self, card):

@@ -6,7 +6,7 @@ import random
 debug = True
 trace = False
 
-class Deck():
+class Deck:
 
     def __init__(self, shuffled=False):
 
