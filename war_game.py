@@ -9,148 +9,140 @@ trace = True
 class WarGame():
 
     def __init__(self):
-        self.player_score = 6
-        self.computer_score = 6
-
+        
         deck = Deck()
         deck.shuffle()
+
+        game_deck = []
+        
+        for i in range(12):
+            game_deck.append(deck.get_card())
+
+        if trace: print(f"game deck({len(game_deck)}): {game_deck}")
 
         self.player_deck = []
         self.computer_deck = []
 
-        for i in range(self.player_score):
-            self.player_deck.insert(0, deck.get_card())
-            self.computer_deck.insert(0, deck.get_card())
+        while len(game_deck) > 0:
+            self.player_deck.insert(0, game_deck.pop())
+            self.computer_deck.insert(0, game_deck.pop())
 
-        if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}")
+        if trace: print(f"\nplayer deck({len(self.player_deck)}): {self.player_deck}")
         
         if trace: print(f"\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
 
 
-    def play(self):
+    # def play(self):
 
-        while True:
-            if debug: print("\ninitialized play()")
+    #     while True:
+    #         if debug: print("\nplay()")
             
-            self.cards_on_table = []
+    #         self.cards_on_table = []
 
-            if len(self.player_deck) == 0:
-                print(">>> Game Over...Computer Won War")
-                break
+    #         if len(self.player_deck) == 0:
+    #             print(">>> Game Over...Computer Won War")
+    #             break
                 
-            self.player_battle_card = self.player_deck.pop(0)
-            self.cards_on_table.append(self.player_battle_card)
-            self.player_battle_card.reveal_card()
+    #         player_battle_card = self.player_deck.pop()
+    #         self.cards_on_table.append(player_battle_card)
 
-            if len(self.computer_deck) == 0:
-                print(">>> Game Over...Player Won War")
-                break
+    #         if len(self.computer_deck) == 0:
+    #             print(">>> Game Over...Player Won War")
+    #             break
             
-            self.computer_battle_card = self.computer_deck.pop(0)
-            self.cards_on_table.append(self.computer_battle_card)
-            self.computer_battle_card.reveal_card()
+    #         computer_battle_card = self.computer_deck.pop()
+    #         self.cards_on_table.append(computer_battle_card)
 
-            print(f"player card: {self.player_battle_card} \ncomputer card: {self.computer_battle_card}")
+    #         print(f"player card: {player_battle_card} \ncomputer card: {computer_battle_card}")
 
-            if self.player_battle_card.equal_value(self.computer_battle_card):
-                if trace: print("cards have equal value...time for war")
+    #         if player_battle_card.equal_value(computer_battle_card):
+    #             if trace: print("cards have equal value...time for war")
                     
-                self.lets_war()
+    #             self.lets_war()
     
-            else:
-                if trace: print("cards have different values")
+    #         else:
+    #             if trace: print("cards have different values")
     
-                self.clear_table(self.player_battle_card, self.computer_battle_card)
+    #             self.clear_table(player_battle_card, computer_battle_card)
             
-            if self.player_score <= 0:
-                print("\n>>> Game Over...Computer Won War")
-                break
+    #         if len(self.player_deck) == 0:
+    #             print("\n>>> Game Over...Computer Won War")
+    #             break
 
-            if self.computer_score <= 0:
-                print("\n>>> Game Over...Player Won War")
-                break
+    #         if len(self.computer_deck) == 0:
+    #             print("\n>>> Game Over...Player Won War")
+    #             break
 
-            response = input("\nReveal another card? ")
+    #         # response = input("\nReveal another card? ")
 
-            if response[0].lower() != "y":
-                print("\n>>> Game Over...You Surrendered")
-                break
+    #         # if response[0].lower() != "y":
+    #         #     print("\n>>> Game Over...You Surrendered")
+    #         #     break
     
         
-    def lets_war(self):
+    # def lets_war(self):
 
-        if debug: print("initialized lets_war()")
+    #     if debug: print("lets_war()")
 
-        while True:
+    #     while True:
         
-            for i in range(3):
-                if len(self.player_deck) == 0:
-                    break
+    #         for i in range(3):
+    #             if len(self.player_deck) == 0:
+    #                 break
 
-                self.cards_on_table.append(self.player_deck.pop())
+    #             self.cards_on_table.append(self.player_deck.pop())
 
-                if len(self.computer_deck) == 0:
-                    break
+    #             if len(self.computer_deck) == 0:
+    #                 break
                     
-                self.cards_on_table.append(self.computer_deck.pop())
+    #             self.cards_on_table.append(self.computer_deck.pop())
             
-            if len(self.player_deck) == 0:
-                break
+    #         if len(self.player_deck) == 0 or len(self.computer_deck) == 0:
+    #             break
                 
-            player_war_card = self.player_deck.pop()
-            self.cards_on_table.append(player_war_card)
-            player_war_card.reveal_card()
+    #         player_war_card = self.player_deck.pop()
+    #         self.cards_on_table.append(player_war_card)
 
-            if len(self.computer_deck) == 0:
-                break
-                
-            computer_war_card = self.computer_deck.pop()
-            self.cards_on_table.append(computer_war_card)
-            computer_war_card.reveal_card()
+    #         computer_war_card = self.computer_deck.pop()
+    #         self.cards_on_table.append(computer_war_card)
 
-            if trace: print(f"cards on table: {len(self.cards_on_table)}")
+    #         if trace: print(f"cards on table: {len(self.cards_on_table)}")
     
-            if player_war_card.equal_value(computer_war_card):
-                if trace: print("cards have equal value...time for war")
-                continue
+    #         if player_war_card.equal_value(computer_war_card):
+    #             if trace: print("cards have equal value...time for war")
+    #             continue
 
-            self.clear_table(player_war_card, computer_war_card)
+    #         self.clear_table(player_war_card, computer_war_card)
             
         
-    def clear_table(self, player_card, computer_card):
+    # def clear_table(self, player_card, computer_card):
 
-        if debug: print("initialized clear_table()")
+    #     if debug: print("clear_table()")
 
-        if player_card.greater_value(computer_card) == True:
-            print("player card is higher")
+    #     if player_card.greater_value(computer_card) == True:
+    #         print("player card is higher")
 
-            for card in self.cards_on_table:
-                card.conceal_card()
-                self.player_deck.insert(0, card)
+    #         for card in self.cards_on_table:
+    #             self.player_deck.insert(0, card)
 
-            self.player_score += (len(self.cards_on_table) / 2)
-            self.computer_score -= (len(self.cards_on_table) / 2)
-
-        else:
-            print("computer card is higher")
+    #     else:
+    #         print("computer card is higher")
             
-            for card in self.cards_on_table:
-                card.conceal_card()
-                self.computer_deck.insert(0, card)
+    #         for card in self.cards_on_table:
+    #             self.computer_deck.insert(0, card)
 
-            self.computer_score += (len(self.cards_on_table) / 2)
-            self.player_score -= (len(self.cards_on_table) / 2)
+    #     if trace: print(f"cards on table({len(self.cards_on_table)}): {self.cards_on_table}")
 
-        if trace: print(f"cards on table: {len(self.cards_on_table)}")
+    #     if trace: print(f"player deck({len(self.player_deck)}): {self.player_deck}\ncomputer deck({len(self.computer_deck)}): {self.computer_deck}")
 
-        print(f"player score: {self.player_score}, computer score: {self.computer_score}")
+    #     print(f"player score: {len(self.player_deck)}, computer score: {len(self.computer_deck)}")
 
-        self.cards_on_table = []
+    #     self.cards_on_table = []
         
-        if trace: print(f"cards on table: {len(self.cards_on_table)}")
+    #     if trace: print(f"cards on table: {len(self.cards_on_table)}")
                 
 
 if __name__ == "__main__":
     war_game = WarGame()
-    war_game.play()
+    # war_game.play()
 

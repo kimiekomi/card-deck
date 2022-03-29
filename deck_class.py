@@ -8,16 +8,16 @@ trace = False
 
 class Deck():
 
-    def __init__(self):
+    def __init__(self, shuffled=False):
 
         self.ranks = [Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King]
         self.suits = [Spades, Clubs, Hearts, Diamonds]
         self.face_up = False
 
-        self.create_deck()
+        self.create_deck(shuffled)
 
 
-    def create_deck(self):
+    def create_deck(self, shuffled=False):
           
         self.deck = []
         
@@ -30,26 +30,29 @@ class Deck():
                 if rank == Ace:
                     value = 14
                 
-                elif rank == Jack:
-                    value = 11
-                    
-                elif rank == Queen:
-                    value = 12
-                    
                 elif rank == King:
                     value = 13
 
+                elif rank == Queen:
+                    value = 12
+                    
+                elif rank == Jack:
+                    value = 11
+                    
                 else:
                     value = int(rank)
 
-                card = Card(suit, rank, value, 0)
+                card = Card(suit, rank)
                 self.deck.append(card)
+
+        if shuffled:
+            random.shuffle(self.deck)
 
         return self.deck
         
         
     def shuffle(self):
-        random.shuffle(self.create_deck())
+        random.shuffle(self.deck)
 
 
     def get_card(self):
@@ -60,9 +63,14 @@ class Deck():
 
 
     def is_empty(self):
+
         if len(self.deck) == 0: return True 
 
-    
+
+    def has_cards (self):
+
+        return len(self.deck) > 0
+
     def __len__(self):
         return len(self.deck)
     
@@ -75,7 +83,7 @@ class Deck():
 
 if __name__ == "__main__":
     deck = Deck()
-    deck.print ()
+    # deck.print ()
 
     # deck.shuffle()
     # deck.print()
