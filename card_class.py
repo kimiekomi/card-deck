@@ -17,10 +17,12 @@ Diamonds = 4
 
 class Card:
 
-    def __init__(self, suit, rank):
+    def __init__(self, suit, rank, game=None):
+
         self.suit = suit
         self.rank = rank
         self.value = rank
+        self.game = game
 
         if self.value == Ace:
             self.value += 13
@@ -39,32 +41,30 @@ class Card:
 
 
     def __lt__(self, other):
+
+        if self.game != None:
+            return self.game.cardLessThan(self, other)
+            
         return self.value < other.value
         
 
     def __eq__(self, other):
+        if self.game != None:
+            return self.game.cardEqualTo(self, other)
+
         return self.value == other.value
 
 
     def __gt__(self, other):
+        if self.game != None:
+            return self.game.cardGreaterThan(self, other)
+
         return self.value > other.value
 
         
     def same_suit(self, other):
         return self.suit == other.suit 
         
-
-    # def compare_value(self, card):
-    #     return self.value - card.value
-
-
-    # def greater_value(self, card):
-    #     return self.value > card.value
-
-
-    # def equal_value(self, card):
-    #     return self.value == card.value
-
 
     def lesser_value(self, card):
         return self.value < card.value

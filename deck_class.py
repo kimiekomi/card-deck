@@ -8,7 +8,8 @@ trace = False
 
 class Deck:
 
-    def __init__(self, shuffled=False):
+    def __init__(self, game, shuffled=False):
+        self.game = game
 
         self.ranks = [Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King]
         self.suits = [Spades, Clubs, Hearts, Diamonds]
@@ -27,22 +28,7 @@ class Deck:
             for rank in self.ranks:
                 if trace: print(f"looping through rank: '{rank}'")
 
-                if rank == Ace:
-                    value = 14
-                
-                elif rank == King:
-                    value = 13
-
-                elif rank == Queen:
-                    value = 12
-                    
-                elif rank == Jack:
-                    value = 11
-                    
-                else:
-                    value = int(rank)
-
-                card = Card(suit, rank)
+                card = Card(suit, rank, self.game)
                 self.deck.append(card)
 
         if shuffled:
