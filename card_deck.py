@@ -47,12 +47,10 @@ class Deck:
 
 
     def is_empty(self):
-
         return len(self.deck) == 0 
 
 
     def has_cards (self):
-
         return len(self.deck) > 0
 
     def __len__(self):
