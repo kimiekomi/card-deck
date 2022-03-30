@@ -12,6 +12,8 @@ class BlackJack(CardGame):
     def __init__(self):
         super().__init__()
 
+        self.deck.get_card()
+
 
 if __name__ == "__main__":
     game = BlackJack()

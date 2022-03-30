@@ -16,10 +16,7 @@ class CardGame:
         if trace: print(f"shuffled_deck({len(self.deck)}): {self.deck}")
 
 
-    def burn(self):
-        self.remove_card = True
-        return self.deck.get_card()
-
+    
 
 class Player:
     def __init__(self, hand):
@@ -49,7 +46,5 @@ if __name__ == "__main__":
     
     burn_card = game.burn()
     print(f"burn_card: {burn_card}")
-
-    game.cut()
 
     
