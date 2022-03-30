@@ -21,13 +21,6 @@ class CardGame:
         return self.deck.get_card()
 
 
-    def cut(self):
-        random_index = random.randrange(len(self.deck))
-        cut_card = self.deck[random_index]
-
-        return cut_card
-        
-
 class Player:
     def __init__(self, hand):
         self.hand = hand
