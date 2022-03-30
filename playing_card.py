@@ -70,10 +70,6 @@ class Card:
         return self.suit == other.suit 
         
 
-    def lesser_value(self, card):
-        return self.value < card.value
-
-    
     def __repr__(self):
 
         if self.face_up == False:
@@ -137,9 +133,6 @@ if __name__ == "__main__":
     # print(ace_of_spades.same_suit(two_of_spades))
     # print(ace_of_spades.same_suit(two_of_clubs))
     
-    # print(two_of_clubs.compare_value(two_of_spades))
-    # print(jack_of_diamonds.compare_value(two_of_spades))
-
     print(jack_of_diamonds > two_of_spades)
     print(queen_of_hearts == two_of_spades)
     print(ace_of_spades < two_of_spades)
