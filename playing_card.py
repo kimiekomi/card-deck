@@ -23,8 +23,8 @@ class Card:
         self.rank = rank
         self.value = rank
 
-        if self.value == Ace:
-            self.value += 13
+        if self.value == Jack or self.value == Queen or self.value == King:
+            self.value = 10
             
         self.game = game
         self.face_up = True

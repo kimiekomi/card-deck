@@ -16,8 +16,6 @@ class CardGame:
         if trace: print(f"shuffled_deck({len(self.deck)}): {self.deck}")
 
 
-    
-
 class Player:
     def __init__(self, hand):
         self.hand = hand
