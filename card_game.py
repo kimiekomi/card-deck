@@ -4,7 +4,5 @@ from deck_class import *
 class CardGame:
 
     def __init__(self):
-        self.deck = Deck(self)
-        self.deck.shuffle()
 
-    
+        self.deck = Deck(self, shuffled=True)

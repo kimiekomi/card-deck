@@ -31,16 +31,15 @@ class Deck:
                 self.deck.append(card)
 
         if shuffled:
-            random.shuffle(self.deck)
+            self.shuffle()
 
-        return self.deck
-        
         
     def shuffle(self):
         random.shuffle(self.deck)
 
 
     def get_card(self):
+
         if len(self.deck) == 0:
             return "Deck is empty"
             

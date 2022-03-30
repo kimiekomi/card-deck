@@ -2,7 +2,7 @@
 
 from card_class import *
 from deck_class import *
-from card_game import CardGame
+from card_game import *
 
 debug = False
 trace = False
@@ -14,5 +14,5 @@ class BlackJack(CardGame):
 
 
 if __name__ == "__main__":
-    blackjack = BlackJack()
+    game = BlackJack()
 

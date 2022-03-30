@@ -2,7 +2,7 @@
 
 from card_class import *
 from deck_class import *
-from card_game import CardGame
+from card_game import *
 
 debug = False
 trace = False
@@ -116,6 +116,6 @@ class WarGame(CardGame):
         
 
 if __name__ == "__main__":
-    war_game = WarGame()
-    war_game.play()
+    game = WarGame()
+    game.play()
 

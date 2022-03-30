@@ -6,9 +6,9 @@ debug = True
 trace = False
 
 Ace = 1
-King = 13
-Queen = 12
 Jack = 11
+Queen = 12
+King = 13
 
 Spades = 1
 Clubs = 2
@@ -22,11 +22,11 @@ class Card:
         self.suit = suit
         self.rank = rank
         self.value = rank
-        self.game = game
 
         if self.value == Ace:
             self.value += 13
             
+        self.game = game
         self.face_up = False
         
 
@@ -76,7 +76,7 @@ class Card:
     
     def __repr__(self):
 
-        if self.face == 0:
+        if self.face_up == False:
             return f"_ of _, value: _"
              
         if self.suit == Spades:
