@@ -27,7 +27,7 @@ class Card:
             self.value += 13
             
         self.game = game
-        self.face_up = False
+        self.face_up = True
         
 
     def reveal_card(self):
@@ -47,21 +47,21 @@ class Card:
     def __lt__(self, other):
 
         if self.game != None:
-            return self.game.cardLessThan(self, other)
+            return self.game.card_less_than(self, other)
             
         return self.value < other.value
         
 
     def __eq__(self, other):
         if self.game != None:
-            return self.game.cardEqualTo(self, other)
+            return self.game.card_equal_to(self, other)
 
         return self.value == other.value
 
 
     def __gt__(self, other):
         if self.game != None:
-            return self.game.cardGreaterThan(self, other)
+            return self.game.card_greater_than(self, other)
 
         return self.value > other.value
 
@@ -137,17 +137,14 @@ if __name__ == "__main__":
     # print(ace_of_spades.same_suit(two_of_spades))
     # print(ace_of_spades.same_suit(two_of_clubs))
     
-    # print(two_of_clubs.compare_rank(two_of_spades))
-    # print(two_of_clubs.compare_rank(ace_of_spades))
-    
     # print(two_of_clubs.compare_value(two_of_spades))
     # print(jack_of_diamonds.compare_value(two_of_spades))
 
-    # print(jack_of_diamonds.greater_rank(two_of_spades))
-    # print(queen_of_hearts.equal_rank(two_of_spades))
-    # print(ace_of_spades.lesser_rank(two_of_spades))
+    print(jack_of_diamonds > two_of_spades)
+    print(queen_of_hearts == two_of_spades)
+    print(ace_of_spades < two_of_spades)
 
-    # print(jack_of_diamonds.greater_rank(two_of_spades))
-    # print(queen_of_hearts.equal_rank(two_of_spades))
-    # print(ace_of_spades.lesser_rank(two_of_spades))
+    # print(two_of_clubs.is_face_card())
+    # print(queen_of_hearts.is_face_card())
+    # print(ace_of_spades.is_face_card())
 

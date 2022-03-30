@@ -103,15 +103,15 @@ class WarGame(CardGame):
         if trace: print(f"table cleared: {len(self.cards_on_table)} cards on table")
 
 
-    def cardLessThan(self, card1, card2):
+    def card_less_than(self, card1, card2):
         return card1.value < card2.value
 
 
-    def cardEqualTo(self, card1, card2):
+    def card_equal_to(self, card1, card2):
         return card1.value == card2.value
 
 
-    def cardGreaterThan(self, card1, card2):
+    def card_greater_than(self, card1, card2):
         return card1.value > card2.value
         
 
