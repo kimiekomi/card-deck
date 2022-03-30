@@ -27,7 +27,7 @@ class Card:
             self.value += 13
             
         self.game = game
-        self.face_up = False
+        self.face_up = True
         
 
     def reveal_card(self):

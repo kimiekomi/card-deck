@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
-from card_class import *
-from deck_class import *
+from playing_card import *
+from card_deck import *
 from card_game import *
 
 debug = False

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from card_class import *
+from playing_card import *
 import random
 
 debug = True
@@ -53,6 +53,7 @@ class Deck:
     def has_cards (self):
         return len(self.deck) > 0
 
+    
     def __len__(self):
         return len(self.deck)
     
