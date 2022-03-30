@@ -21,15 +21,19 @@ class BlackJack(CardGame):
 
         if trace: print(f"\ngame deck({len(self.deck)}): {self.deck}")
 
-        self.player_hand = []
-        self.dealer_hand = []
+        # implemented Human and Computer class
+        self.player = Human()
+        self.dealer = Computer()
+        
+        self.player_hand = self.player.hand
+        self.dealer_hand = self.dealer.hand
 
         for i in range(2):
             if len(self.deck) > 0:
                 self.player_hand.append(self.deck.get_card())
                 self.dealer_hand.append(self.deck.get_card())
 
-        print(f"\nplayer hand({len(self.player_hand)}): {self.player_hand}\ndealer hand({len(self.player_hand)}): [{self.dealer_hand[0]}, _ of _]")
+        print(f"\nplayer hand: {self.player_hand}\ndealer hand: [{self.dealer_hand[0]}, _ of _]")
 
 
     def play(self):
@@ -88,7 +92,18 @@ class BlackJack(CardGame):
     def insurance(self):
         pass
 
+
 if __name__ == "__main__":
     game = BlackJack()
     game.play()
     
+
+# need to address ace value of 1 OR 11...?!?!
+
+# where to place following logic:
+# If the dealer's face-up card is a ten-card or an ace, they LOOK AT their face-down card to see if the two cards make a natural. If the face-up card is not a ten-card or an ace, they do not look at the face-down card until it is the dealer's turn to play.
+
+# "look at..."??? so face-down card is not turned up? dealer just peaks??
+
+# if dealer's face-up card is ace...ask if player wants insurance??
+

@@ -17,32 +17,41 @@ class CardGame:
 
 
 class Player:
-    def __init__(self, hand):
-        self.hand = hand
-        self.purse = ""
-        self.wager = ""
+    def __init__(self):
+        self.hand = []
+        # self.purse = ""
+        # self.wager = ""
 
 
+    def __repr__(self):
+        return str(self.hand)
+
+    
     def hit(self):
         pass
 
 
 class Human(Player):
-    def __init__(self, hand):
-        super().__init__(hand)
+    def __init__(self):
+        super().__init__()
 
 
 
 class Computer(Player):
-    def __init__(self, hand):
-        super().__init__(hand)
+    def __init__(self):
+        super().__init__()
         
 
     
 if __name__ == "__main__":
     game = CardGame()
     
-    burn_card = game.burn()
-    print(f"burn_card: {burn_card}")
+    player = Player()
+    print(player)
 
+    human = Human()
+    print(player)
+
+    computer = Computer()
+    print(player)
     
