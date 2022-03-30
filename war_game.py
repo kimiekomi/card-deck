@@ -12,20 +12,18 @@ class WarGame(CardGame):
     def __init__(self):
         super().__init__()
         
-        game_deck = []
-        
-        for i in range(20):
-            game_deck.append(self.deck.get_card())
+        for i in range(32):
+            self.deck.get_card()
 
-        if trace: print(f"game deck({len(game_deck)}): {game_deck}")
+        if trace: print(f"game deck({len(self.deck)}): {self.deck}")
 
         self.player_deck = []
         self.computer_deck = []
         self.cards_on_table = []
 
-        while len(game_deck) > 0:
-            self.player_deck.insert(0, game_deck.pop())
-            self.computer_deck.insert(0, game_deck.pop())
+        while len(self.deck) > 0:
+            self.player_deck.insert(0, self.deck.get_card())
+            self.computer_deck.insert(0, self.deck.get_card())
 
         if trace: print(f"\nplayer deck({len(self.player_deck)}): {self.player_deck}")
         

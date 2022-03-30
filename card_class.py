@@ -27,19 +27,23 @@ class Card:
         if self.value == Ace:
             self.value += 13
             
-        self.face = True
-
+        self.face_up = False
+        
 
     def reveal_card(self):
-        self.face = True
+        self.face_up = True
         return self.face
 
 
     def conceal_card(self):
-        self.face = False
+        self.face_up = False
         return self.face
 
 
+    def is_face_card(self):
+        return self.rank == Jack or self.rank == Queen or self.rank == King
+
+    
     def __lt__(self, other):
 
         if self.game != None:

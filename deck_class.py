@@ -13,7 +13,6 @@ class Deck:
 
         self.ranks = [Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King]
         self.suits = [Spades, Clubs, Hearts, Diamonds]
-        self.face_up = False
 
         self.create_deck(shuffled)
 
@@ -50,7 +49,7 @@ class Deck:
 
     def is_empty(self):
 
-        if len(self.deck) == 0: return True 
+        return len(self.deck) == 0 
 
 
     def has_cards (self):
