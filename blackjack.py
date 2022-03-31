@@ -104,7 +104,6 @@ class BlackJack(CardGame):
                     if trace: print("player elected to 'stand'")
     
                     self.dealers_move()
-                    break
     
                     self.define_winner()
     
