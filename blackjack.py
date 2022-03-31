@@ -98,27 +98,31 @@ class BlackJack(CardGame):
                 self.is_natural()
                 break
         
-            elif first_option == "s":
-                if trace: print("player elected to split pair")
+            # elif first_option == "s":
+            #     if trace: print("player elected to split pair")
         
-                if self.player.hand[0].rank == self.player.hand[1].rank:
-                    self.split()
-                    break
+            #     if self.player.hand[0].rank == self.player.hand[1].rank:
+            #         self.split()
+            #         break
         
-                print("> equal rank cards...unable split")
-                continue
+            #     print("> equal rank cards...unable split")
+            #     continue
         
             elif first_option == "d":
                 if trace: print("player elected to double down")
-                    
-                self.double()
-                break
+
+                if self.player.hand[0].value + self.player.hand[0].value == 9 or self.player.hand[0].value + self.player.hand[0].value == 10 or self.player.hand[0].value + self.player.hand[0].value == 11:
+                    self.double()
+                    break
+
+                print("> cards total not 9, 10, or 11...unable double")
+                continue
         
-            elif first_option != "t" and first_option != "s" and first_option != "d" and first_option != "h":
-                if trace: print("player elected to surrender")
+            # elif first_option != "t" and first_option != "s" and first_option != "d" and first_option != "h":
+            #     if trace: print("player elected to surrender")
                     
-                self.surrender()
-                break
+            #     self.surrender()
+            #     break
         
             elif first_option == "h":
                 if trace: print("player elected to hit")
@@ -128,7 +132,7 @@ class BlackJack(CardGame):
                 
 
     def hit_loop(self):
-        if debug: print("called hit_me()")
+        if debug: print("called hit_loop()")
             
         while True:
             self.player.hit()
@@ -155,12 +159,26 @@ class BlackJack(CardGame):
             break
             
         
-    def split(self):
-        pass
+    # def split(self):
+    #     if debug: print("called split()")
+
+    #     split1 = []
+    #     split2 = []
+
+    #     split1.append(self.player_hand[0])
+    #     split2.append(self.player_hand[1])
 
 
-    # def double(self):
-    #     pass
+    def double(self):
+        if debug: print("called double()")
+            
+        self.initial_bet += self.initial_bet
+        self.player_bank -= (self.initial_bet/2)
+
+        print(f"Updated Player Bank: ${self.player_bank}")
+
+        self.player.hit()
+        self.define_winner()
 
 
     # def insurance(self):
