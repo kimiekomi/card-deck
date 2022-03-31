@@ -78,7 +78,7 @@ class BlackJack(CardGame):
             if first_move == "t":
                 if trace: print("player elected to 'stand'")
                     
-                self.natural()
+                self.is_natural()
 
             # elif first_move == "s":
                 # if trace: print("player elected to split pair")
@@ -147,10 +147,10 @@ class BlackJack(CardGame):
     #     pass
 
 
-    def natural(self):
+    def is_natural(self):
         
         while True: 
-            if debug: print("called natural()")
+            if debug: print("called is_natural()")
     
             self.dealers_move()
                 
