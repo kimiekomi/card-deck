@@ -3,17 +3,18 @@
 from playing_card import *
 from card_deck import *
 from card_game import *
+import os
 
 debug = True
 trace = False
 
 class BlackJack(CardGame):
 
-    def __init__(self, initial_bet=10):
+    def __init__(self): 
         super().__init__()
 
-        self.initial_bet = initial_bet
-        self.player_bank = 0 -(self.initial_bet)
+        self.initial_bet = 0
+        self.player_bank = 0
 
         # burn card
         self.deck.get_card()
@@ -32,56 +33,74 @@ class BlackJack(CardGame):
                 self.player_hand.append(self.deck.get_card())
                 self.dealer_hand.append(self.deck.get_card())
 
-        print(f"\ncards dealt\nplayer hand: {self.player_hand}\ndealer hand: [ _ of _, {self.dealer_hand[1]},]")
-
 
     def play(self):
-        if debug: print(f"\ncalled play() with initial bet: ${self.initial_bet}")
+        if debug: print(f"\ncalled play()")
 
-        self.player_hand_total = 0
-        for card in self.player_hand:
-            self.player_hand_total += card.value
+        while True:
+            try:
+                self.initial_bet = int(input("Enter initial bet: $ "))
+
+            except ValueError:
+                print("> Error: Enter a valid number\n")
+                continue
             
-        self.dealer_hand_total = 0
-        for card in self.dealer_hand:
-            self.dealer_hand_total += card.value
+            self.player_bank -= self.initial_bet
 
-        print(f"player hand total: {self.player_hand_total}") 
-        if trace: print(f"dealer hand total: '{self.dealer_hand_total}'")
-        print(f"dealer card1 value: {self.dealer_hand[0].value}") 
+            print(f"Player Bank: ${self.player_bank}\n")
 
-        first_move = input("\nEnter first move: ").lower()
+            print(f"\ncards dealt\nplayer hand: {self.player_hand}\ndealer hand: [ _ of _, {self.dealer_hand[1]}]")
 
-        if first_move[0] != "h":
-            self.natural()
-
-        else:
-            while True:
-                self.hit()
-    
-                if self.player_hand_total > 21: 
-                    break
-                            
-                player_options = input("\nEnter next move: ").lower()
+            self.player_hand_total = 0
+            for card in self.player_hand:
+                self.player_hand_total += card.value
                 
-                if player_options[0] == "h":
-                    continue
+            self.dealer_hand_total = 0
+            for card in self.dealer_hand:
+                self.dealer_hand_total += card.value
     
-                # elif player_options[0] == "s":
-                #     self.split()
+            print(f"player hand total: {self.player_hand_total}") 
+            if trace: print(f"dealer hand total: '{self.dealer_hand_total}'")
+            print(f"dealer card2 value: {self.dealer_hand[1].value}") 
+    
+            first_move = input("\nEnter first move: ").lower()
+    
+            if first_move[0] != "h":
+                self.natural()
+
+            else:
+                while True:
+                    self.hit()
         
-                # elif player_options[0] == "d":
-                #     self.double()
-
-                print(f"dealer hand revealed: {self.dealer_hand}")
-
-                self.dealers_move()
-                break
-
-        self.define_winner()
-
-        if trace: print(f"\nplayer bank: ${self.player_bank}\ndealer bank: ${self.dealer_bank}")
+                    if self.player_hand_total > 21: 
+                        break
+                                
+                    player_options = input("\nEnter next move: ").lower()
+                    
+                    if player_options[0] == "h":
+                        continue
+        
+                    # elif player_options[0] == "s":
+                    #     self.split()
             
+                    # elif player_options[0] == "d":
+                    #     self.double()
+    
+                    print(f"dealer hand revealed: {self.dealer_hand}")
+    
+                    self.dealers_move()
+                    break
+    
+            self.define_winner()
+    
+            another_round = input("Another Round? ").lower()
+    
+            if another_round[0] != "y":
+                print("Goodbye...\n")
+                break
+            
+            os.system("clear")
+
             
     def hit(self):
         if debug: print("called hit()")
@@ -146,35 +165,37 @@ class BlackJack(CardGame):
         if debug: print("called define_winner()")
             
         if self.player_hand_total == 21 and self.dealer_hand_total != 21:
-            print("\n>>> Player has Blackjack...You Win\n")
+            print("\n>>> Player has Blackjack...You Win")
             self.player_bank += self.initial_bet * 2
 
         if self.dealer_hand_total == 21 and self.player_hand_total != 21:
-            print("\n>>> Dealer has Blackjack...You Lose\n")
+            print("\n>>> Dealer has Blackjack...You Lose")
 
         if self.player_hand_total == 21 and self.dealer_hand_total == 21:
-            print("\n>>> Both have Blackjack\n")
+            print("\n>>> Both have Blackjack")
             self.player_bank += self.initial_bet
 
         if self.player_hand_total > 21:
-            print("\n>>> Player Bust...You Lose\n")
+            print("\n>>> Player Bust...You Lose")
 
         if self.dealer_hand_total > 21:
-            print("\n>>> Dealer Bust...You Win\n")
+            print("\n>>> Dealer Bust...You Win")
             self.player_bank += self.initial_bet * 2
 
         if self.player_hand_total < 21 and self.dealer_hand_total < 21:
             if self.player_hand_total > self.dealer_hand_total:
-                print("\n>>> You are closer to 21...You Win\n")
+                print("\n>>> You are closer to 21...You Win")
                 self.player_bank += self.initial_bet * 2
             
             elif self.player_hand_total == self.dealer_hand_total:
-                print("\n>>> Equal Value...Its a Draw\n")
+                print("\n>>> Equal Value...Its a Draw")
                 self.player_bank += self.initial_bet
 
             else:
                 self.player_hand_total < self.dealer_hand_total
-                print("\n>>> Dealer is closer to 21...You Lose\n")  
+                print("\n>>> Dealer is closer to 21...You Lose") 
+
+        print(f">>> Player Bank: ${self.player_bank}\n")
 
 
 if __name__ == "__main__":
