@@ -39,12 +39,12 @@ class BlackJack(CardGame):
 
         while True:
             try:
-                self.initial_bet = int(input("Enter initial bet: $ "))
+                self.initial_bet = int(input("Enter initial bet: $ ") or 10)
 
             except ValueError:
                 print("> Error: Enter a valid number\n")
                 continue
-            
+
             self.player_bank -= self.initial_bet
 
             print(f"Player Bank: ${self.player_bank}\n")
