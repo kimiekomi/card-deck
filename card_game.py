@@ -19,6 +19,7 @@ class CardGame:
 class Player:
     def __init__(self):
         self.hand = []
+        self.hand_total = 0
         # self.purse = ""
         # self.wager = ""
 
@@ -34,7 +35,6 @@ class Player:
 class Human(Player):
     def __init__(self):
         super().__init__()
-
 
 
 class Computer(Player):

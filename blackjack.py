@@ -6,7 +6,7 @@ from card_game import *
 import os
 
 debug = True
-trace = False
+trace = True
 
 class BlackJack(CardGame):
 
@@ -28,16 +28,29 @@ class BlackJack(CardGame):
         self.player_hand = self.player.hand
         self.dealer_hand = self.dealer.hand
 
-        for i in range(2):
-            if len(self.deck) > 0:
-                self.player_hand.append(self.deck.get_card())
-                self.dealer_hand.append(self.deck.get_card())
+        self.player_hand_total = None
+        self.dealer_hand_total = None
 
 
     def play(self):
         if debug: print(f"\ncalled play()")
 
         while True:
+            self.player_hand =[]
+            self.dealer_hand = []
+
+            self.player_hand_total = 0
+            self.dealer_hand_total = 0
+
+            if trace: print(f"player hand({len(self.player_hand)}), dealer hand({len(self.dealer_hand)})\nplayer total: {self.player_hand_total}, dealer total: {self.dealer_hand_total}")
+                
+            for i in range(2):
+                if len(self.deck) > 0:
+                    self.player_hand.append(self.deck.get_card())
+                    self.dealer_hand.append(self.deck.get_card())
+
+            print(f"Player Bank: ${self.player_bank}\n")
+            
             try:
                 self.initial_bet = int(input("Enter initial bet: $ ") or 10)
 
@@ -47,7 +60,7 @@ class BlackJack(CardGame):
 
             self.player_bank -= self.initial_bet
 
-            print(f"Player Bank: ${self.player_bank}\n")
+            print(f"Updated Player Bank: ${self.player_bank}\n")
 
             print(f"\ncards dealt\nplayer hand: {self.player_hand}\ndealer hand: [ _ of _, {self.dealer_hand[1]}]")
 
@@ -91,14 +104,14 @@ class BlackJack(CardGame):
                     self.dealers_move()
                     break
     
-            self.define_winner()
+                self.define_winner()
     
             another_round = input("Another Round? ").lower()
     
             if another_round[0] != "y":
-                print("Goodbye...\n")
+                print("\nGoodbye...\n")
                 break
-            
+
             os.system("clear")
 
             
@@ -163,6 +176,13 @@ class BlackJack(CardGame):
         
     def define_winner(self):
         if debug: print("called define_winner()")
+
+        if self.player_hand_total > 21:
+            print("\n>>> Player Bust...You Lose")
+
+        if self.dealer_hand_total > 21:
+            print("\n>>> Dealer Bust...You Win")
+            self.player_bank += self.initial_bet * 2
             
         if self.player_hand_total == 21 and self.dealer_hand_total != 21:
             print("\n>>> Player has Blackjack...You Win")
@@ -174,13 +194,6 @@ class BlackJack(CardGame):
         if self.player_hand_total == 21 and self.dealer_hand_total == 21:
             print("\n>>> Both have Blackjack")
             self.player_bank += self.initial_bet
-
-        if self.player_hand_total > 21:
-            print("\n>>> Player Bust...You Lose")
-
-        if self.dealer_hand_total > 21:
-            print("\n>>> Dealer Bust...You Win")
-            self.player_bank += self.initial_bet * 2
 
         if self.player_hand_total < 21 and self.dealer_hand_total < 21:
             if self.player_hand_total > self.dealer_hand_total:
@@ -195,7 +208,7 @@ class BlackJack(CardGame):
                 self.player_hand_total < self.dealer_hand_total
                 print("\n>>> Dealer is closer to 21...You Lose") 
 
-        print(f">>> Player Bank: ${self.player_bank}\n")
+        print(f">>> Updated Player Bank: ${self.player_bank}")
 
 
 if __name__ == "__main__":
