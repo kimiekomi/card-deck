@@ -117,7 +117,7 @@ class BlackJack(CardGame):
             
         if self.player_hand_total == 21 and self.dealer_hand_total != 21:
             print("\n>>> Player has Natural...You Win\n")
-            self.player_bank += (1.5 * self.initial_bet)
+            self.player_bank += self.initial_bet * 2.5
 
         if self.dealer_hand_total == 21 and self.playerer_hand_total != 21:
             print("\n>>> Dealer has Natural...You Lose\n")
@@ -181,13 +181,6 @@ if __name__ == "__main__":
     game = BlackJack()
     game.play()
     
-
-# need to address ace value of 1 OR 11...?!?!
-
-# where to place following logic:
-# If the dealer's face-up card is a ten-card or an ace, they LOOK AT their face-down card to see if the two cards make a natural. If the face-up card is not a ten-card or an ace, they do not look at the face-down card until it is the dealer's turn to play.
-
-# "look at..."??? so face-down card is not turned up? dealer just peaks??
 
 # if dealer's face-up card is ace...ask if player wants insurance??
 
