@@ -146,6 +146,7 @@ class BlackJack(CardGame):
 
 
     def natural(self):
+        
         while True: 
             if debug: print("called natural()")
     
@@ -154,16 +155,20 @@ class BlackJack(CardGame):
             if self.player_hand_total == 21 and self.dealer_hand_total != 21:
                 print("\n>>> Player has Natural...You Win")
                 self.player_bank += self.initial_bet * 2.5
+                break
     
             if self.dealer_hand_total == 21 and self.player_hand_total != 21:
                 print("\n>>> Dealer has Natural...You Lose")
+                break
     
             if self.player_hand_total == 21 and self.dealer_hand_total == 21:
                 print("\n>>> Both have Natural...Its a Draw")
                 self.player_bank += self.initial_bet
+                break
     
             else:
                 self.define_winner()
+                break
 
     
     def dealers_move(self):
