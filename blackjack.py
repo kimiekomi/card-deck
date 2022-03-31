@@ -5,8 +5,8 @@ from card_deck import *
 from card_game import *
 import os
 
-debug = False
-trace = False
+debug = True
+trace = True
 
 class BlackJack(CardGame):
 
@@ -73,53 +73,8 @@ class BlackJack(CardGame):
             if trace: print(f"dealer hand total: {self.dealer_hand_total}")
             print(f"dealer card2 value: {self.dealer.hand[1].value}") 
 
-            first_move = input("\nEnter first move: ").lower()
-
-            if first_move == "t":
-                if trace: print("player elected to 'stand'")
-                    
-                self.is_natural()
-
-            # elif first_move == "s":
-                # if trace: print("player elected to split pair")
-                
-                # self.split()
-        
-            # elif first_move == "d":
-                # if trace: print("player elected to double down")
-                    
-                # self.double()
-
-            # elif first_move == "x":
-                # if trace: print("player elected to surrender")
-                    
-                # self.surrender()
-
-            else:
-                while True:
-                    self.player.hit()
-
-                    self.player_hand_total += self.player.hit_card.value
-
-                    print(f"updated player hand: {self.player.hand}")
-                    print(f"updated player hand total: {self.player_hand_total}") 
-                    print(f"dealer card1 value: {self.dealer.hand[1].value}") 
-        
-                    if self.player_hand_total >= 21: 
-                        self.define_winner()
-                        break
-                    
-                    player_options = input("\nEnter next move: ").lower()
-
-                    if player_options == "h":
-                        continue
-        
-                    if trace: print("player elected to 'stand'")
-    
-                    self.dealers_move()
-                    self.define_winner()
-                    break
-
+            self.player_options()
+            
             print(f">>> Updated Player Bank: ${self.player_bank}")
     
             another_round = input("\nAnother Round? ").lower()
@@ -130,9 +85,72 @@ class BlackJack(CardGame):
 
             os.system("clear")
 
+
+    def player_options(self):
+        if debug: print("called player_options()")
+
+        while True:
             
-    # def split(self):
-    #     pass
+            first_option = input("\nEnter first move: ").lower()
+        
+            if first_option == "t":
+                if trace: print("player elected to stand")
+                    
+                self.is_natural()
+                break
+        
+            elif first_option == "s":
+                if trace: print("player elected to split pair")
+        
+                if self.player.hand[0].rank == self.player.hand[1].rank:
+                    self.split()
+                    break
+        
+                print("equal rank cards...unable split")
+                continue
+        
+            elif first_option == "d":
+                if trace: print("player elected to double down")
+                    
+                self.double()
+                break
+        
+            elif first_option != "t" and first_option != "s" and first_option != "d" and first_option != "h":
+                if trace: print("player elected to surrender")
+                    
+                self.surrender()
+                break
+        
+            elif first_option == "h":
+                while True:
+                    self.player.hit()
+        
+                    self.player_hand_total += self.player.hit_card.value
+        
+                    print(f"updated player hand: {self.player.hand}")
+                    print(f"updated player hand total: {self.player_hand_total}") 
+                    print(f"dealer card1 value: {self.dealer.hand[1].value}") 
+        
+                    if self.player_hand_total >= 21: 
+                        self.define_winner()
+                        break
+
+                    next_option = input("\nEnter next move: ").lower()
+
+                    if next_option == "h":
+                        continue
+        
+                    if trace: print("player elected to stand")
+
+                    self.dealers_move()
+                    self.define_winner()
+                    break
+
+                break
+
+        
+    def split(self):
+        pass
 
 
     # def double(self):
