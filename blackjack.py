@@ -103,12 +103,10 @@ class BlackJack(CardGame):
 
                     if trace: print("player elected to 'stand'")
     
-                    print(f"dealer hand revealed: {self.dealer_hand}")
-    
                     self.dealers_move()
                     break
     
-                self.define_winner()
+                    self.define_winner()
     
             another_round = input("\nAnother Round? ").lower()
     
@@ -167,6 +165,8 @@ class BlackJack(CardGame):
     
     def dealers_move(self):
         if debug: print("called dealers_move()")
+
+        print(f"dealer hand revealed: {self.dealer_hand}")
             
         while self.dealer_hand_total < 17:
             dealer_card = self.deck.get_card()
