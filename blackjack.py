@@ -13,8 +13,7 @@ class BlackJack(CardGame):
         super().__init__()
 
         self.initial_bet = initial_bet
-        self.player_bank = -(self.initial_bet)
-        self.dealer_bank = self.initial_bet
+        self.player_bank = 0 -(self.initial_bet)
 
         # burn card
         self.deck.get_card()
@@ -33,7 +32,7 @@ class BlackJack(CardGame):
                 self.player_hand.append(self.deck.get_card())
                 self.dealer_hand.append(self.deck.get_card())
 
-        print(f"\nplayer hand: {self.player_hand}\ndealer hand: [{self.dealer_hand[0]}, _ of _]")
+        print(f"\ncards dealt\nplayer hand: {self.player_hand}\ndealer hand: [ _ of _, {self.dealer_hand[1]},]")
 
 
     def play(self):
@@ -51,46 +50,131 @@ class BlackJack(CardGame):
         if trace: print(f"dealer hand total: '{self.dealer_hand_total}'")
         print(f"dealer card1 value: {self.dealer_hand[0].value}") 
 
-        player_options = input("\nEnter next move: ").lower()
-        
-        if player_options[0] == "h":
-            self.hit()
+        first_move = input("\nEnter first move: ").lower()
 
-        elif player_options[0] == "s":
-            self.split()
-
-        elif player_options[0] == "d":
-            self.double()
+        if first_move[0] != "h":
+            self.natural()
 
         else:
-            if self.player_hand_total == 21 and self.dealer_hand_total != 21:
-                print("Player has Blackjack")
-                self.player_bank += (1.5 * self.initial_bet)
+            while True:
+                self.hit()
     
-            if self.dealer_hand_total == 21 and self.playerer_hand_total != 21:
-                print("Dealer has Blackjack")
+                if self.player_hand_total > 21: 
+                    break
+                            
+                player_options = input("\nEnter next move: ").lower()
+                
+                if player_options[0] == "h":
+                    continue
     
-            if self.player_hand_total == 21 and self.dealer_hand_total == 21:
-                print("Both have Blackjack")
-                self.player_bank += self.initial_bet
+                # elif player_options[0] == "s":
+                #     self.split()
+        
+                # elif player_options[0] == "d":
+                #     self.double()
+
+                print(f"dealer hand revealed: {self.dealer_hand}")
+
+                self.dealers_move()
+                break
+
+        self.define_winner()
 
         if trace: print(f"\nplayer bank: ${self.player_bank}\ndealer bank: ${self.dealer_bank}")
-
-
+            
+            
     def hit(self):
-        pass
+        if debug: print("called hit()")
+
+        hit_card = self.deck.get_card()
+        self.player_hand.append(hit_card)
+        self.player_hand_total += hit_card.value
+
+        if hit_card.rank == Ace and self.player_hand_total > 21:
+            self.player_hand_total -= 10
+
+        print(f"updated player hand: {self.player_hand}")
+        print(f"updated player hand total: {self.player_hand_total}") 
+        print(f"dealer card1 value: {self.dealer_hand[0].value}") 
 
 
-    def split(self):
-        pass
+    # def split(self):
+    #     pass
 
 
-    def double(self):
-        pass
+    # def double(self):
+    #     pass
 
 
-    def insurance(self):
-        pass
+    # def insurance(self):
+    #     pass
+
+
+    def natural(self):
+        if debug: print("called natural()")
+
+        self.dealers_move()
+            
+        if self.player_hand_total == 21 and self.dealer_hand_total != 21:
+            print("\n>>> Player has Natural...You Win\n")
+            self.player_bank += (1.5 * self.initial_bet)
+
+        if self.dealer_hand_total == 21 and self.playerer_hand_total != 21:
+            print("\n>>> Dealer has Natural...You Lose\n")
+
+        if self.player_hand_total == 21 and self.dealer_hand_total == 21:
+            print("\n>>> Both have Natural...Its a Draw\n")
+            self.player_bank += self.initial_bet
+
+    
+    def dealers_move(self):
+        if debug: print("called dealers_move()")
+            
+        while self.dealer_hand_total < 17:
+            dealer_card = self.deck.get_card()
+            self.dealer_hand.append(dealer_card)
+            self.dealer_hand_total += dealer_card.value 
+
+            if dealer_card.rank == Ace and self.dealer_hand_total >= 17:
+                break
+
+        print(f"updated dealer hand: {self.dealer_hand}")
+        print(f"updated dealer hand total: {self.dealer_hand_total}")
+
+        
+    def define_winner(self):
+        if debug: print("called define_winner()")
+            
+        if self.player_hand_total == 21 and self.dealer_hand_total != 21:
+            print("\n>>> Player has Blackjack...You Win\n")
+            self.player_bank += self.initial_bet * 2
+
+        if self.dealer_hand_total == 21 and self.player_hand_total != 21:
+            print("\n>>> Dealer has Blackjack...You Lose\n")
+
+        if self.player_hand_total == 21 and self.dealer_hand_total == 21:
+            print("\n>>> Both have Blackjack\n")
+            self.player_bank += self.initial_bet
+
+        if self.player_hand_total > 21:
+            print("\n>>> Player Bust...You Lose\n")
+
+        if self.dealer_hand_total > 21:
+            print("\n>>> Dealer Bust...You Win\n")
+            self.player_bank += self.initial_bet * 2
+
+        if self.player_hand_total < 21 and self.dealer_hand_total < 21:
+            if self.player_hand_total > self.dealer_hand_total:
+                print("\n>>> You are closer to 21...You Win\n")
+                self.player_bank += self.initial_bet * 2
+            
+            elif self.player_hand_total == self.dealer_hand_total:
+                print("\n>>> Equal Value...Its a Draw\n")
+                self.player_bank += self.initial_bet
+
+            else:
+                self.player_hand_total < self.dealer_hand_total
+                print("\n>>> Dealer is closer to 21...You Lose\n")  
 
 
 if __name__ == "__main__":
