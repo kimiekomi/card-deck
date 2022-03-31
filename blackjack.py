@@ -87,7 +87,8 @@ class BlackJack(CardGame):
                 while True:
                     self.hit()
         
-                    if self.player_hand_total > 21: 
+                    if self.player_hand_total >= 21: 
+                        self.define_winner()
                         break
                     
                     player_options = input("\nEnter next move: ").lower()
@@ -104,8 +105,10 @@ class BlackJack(CardGame):
                     if trace: print("player elected to 'stand'")
     
                     self.dealers_move()
-    
                     self.define_winner()
+                    break
+
+            print(f">>> Updated Player Bank: ${self.player_bank}")
     
             another_round = input("\nAnother Round? ").lower()
     
@@ -152,14 +155,15 @@ class BlackJack(CardGame):
             print("\n>>> Player has Natural...You Win")
             self.player_bank += self.initial_bet * 2.5
 
-        if self.dealer_hand_total == 21 and self.playerer_hand_total != 21:
+        if self.dealer_hand_total == 21 and self.player_hand_total != 21:
             print("\n>>> Dealer has Natural...You Lose")
 
         if self.player_hand_total == 21 and self.dealer_hand_total == 21:
             print("\n>>> Both have Natural...Its a Draw")
             self.player_bank += self.initial_bet
 
-        print(f"Updated Player Bank: ${self.player_bank}")
+        else:
+            self.define_winner()
 
     
     def dealers_move(self):
@@ -212,8 +216,6 @@ class BlackJack(CardGame):
             else:
                 self.player_hand_total < self.dealer_hand_total
                 print("\n>>> Dealer is closer to 21...You Lose") 
-
-        print(f">>> Updated Player Bank: ${self.player_bank}")
 
 
 if __name__ == "__main__":
