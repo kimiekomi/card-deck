@@ -90,7 +90,6 @@ class BlackJack(CardGame):
         if debug: print("called player_options()")
 
         while True:
-            
             first_option = input("\nEnter first move: ").lower()
         
             if first_option == "t":
@@ -106,7 +105,7 @@ class BlackJack(CardGame):
                     self.split()
                     break
         
-                print("equal rank cards...unable split")
+                print("> equal rank cards...unable split")
                 continue
         
             elif first_option == "d":
@@ -122,32 +121,39 @@ class BlackJack(CardGame):
                 break
         
             elif first_option == "h":
-                while True:
-                    self.player.hit()
-        
-                    self.player_hand_total += self.player.hit_card.value
-        
-                    print(f"updated player hand: {self.player.hand}")
-                    print(f"updated player hand total: {self.player_hand_total}") 
-                    print(f"dealer card1 value: {self.dealer.hand[1].value}") 
-        
-                    if self.player_hand_total >= 21: 
-                        self.define_winner()
-                        break
+                if trace: print("player elected to hit")
+                    
+                self.hit_loop()
+                break
+                
 
-                    next_option = input("\nEnter next move: ").lower()
+    def hit_loop(self):
+        if debug: print("called hit_me()")
+            
+        while True:
+            self.player.hit()
 
-                    if next_option == "h":
-                        continue
-        
-                    if trace: print("player elected to stand")
+            self.player_hand_total += self.player.hit_card.value
 
-                    self.dealers_move()
-                    self.define_winner()
-                    break
+            print(f"updated player hand: {self.player.hand}")
+            print(f"updated player hand total: {self.player_hand_total}") 
+            print(f"dealer card1 value: {self.dealer.hand[1].value}") 
 
+            if self.player_hand_total >= 21: 
+                self.define_winner()
                 break
 
+            next_option = input("\nEnter next move: ").lower()
+
+            if next_option == "h":
+                continue
+
+            if trace: print("player elected to stand")
+
+            self.dealers_move()
+            self.define_winner()
+            break
+            
         
     def split(self):
         pass
