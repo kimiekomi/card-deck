@@ -29,8 +29,16 @@ class Player:
 
     
     def hit(self):
-        pass
+        if debug: print("called hit()")
 
+        hit_card = self.deck.get_card()
+        self.hand.append(hit_card)
+        self.hand_total += hit_card.value
+
+        if hit_card.rank == Ace and self.hand_total > 21:
+            self.hand_total -= 10
+
+        
 
 class Human(Player):
     def __init__(self):
@@ -49,9 +57,11 @@ if __name__ == "__main__":
     player = Player()
     print(player)
 
-    human = Human()
-    print(player)
+    
 
-    computer = Computer()
-    print(player)
+    # human = Human()
+    # print(player)
+
+    # computer = Computer()
+    # print(player)
     

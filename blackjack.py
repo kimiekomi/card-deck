@@ -86,6 +86,10 @@ class BlackJack(CardGame):
             else:
                 while True:
                     self.hit()
+
+                    print(f"updated player hand: {self.player_hand}")
+                    print(f"updated player hand total: {self.player_hand_total}") 
+                    print(f"dealer card1 value: {self.dealer_hand[0].value}") 
         
                     if self.player_hand_total >= 21: 
                         self.define_winner()
@@ -128,10 +132,6 @@ class BlackJack(CardGame):
 
         if hit_card.rank == Ace and self.player_hand_total > 21:
             self.player_hand_total -= 10
-
-        print(f"updated player hand: {self.player_hand}")
-        print(f"updated player hand total: {self.player_hand_total}") 
-        print(f"dealer card1 value: {self.dealer_hand[0].value}") 
 
 
     # def split(self):
