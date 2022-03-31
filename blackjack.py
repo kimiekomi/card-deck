@@ -75,10 +75,25 @@ class BlackJack(CardGame):
 
             first_move = input("\nEnter first move: ").lower()
 
-            if first_move != "h":
+            if first_move == "t":
                 if trace: print("player elected to 'stand'")
                     
                 self.natural()
+
+            # elif first_move == "s":
+                # if trace: print("player elected to split pair")
+                
+                # self.split()
+        
+            # elif first_move == "d":
+                # if trace: print("player elected to double down")
+                    
+                # self.double()
+
+            # elif first_move == "x":
+                # if trace: print("player elected to surrender")
+                    
+                # self.surrender()
 
             else:
                 while True:
@@ -99,12 +114,6 @@ class BlackJack(CardGame):
                     if player_options == "h":
                         continue
         
-                    # elif player_options[0] == "s":
-                    #     self.split()
-            
-                    # elif player_options[0] == "d":
-                    #     self.double()
-
                     if trace: print("player elected to 'stand'")
     
                     self.dealers_move()
@@ -134,6 +143,10 @@ class BlackJack(CardGame):
     #     pass
 
 
+    # def surrender(self):
+    #     pass
+
+
     def natural(self):
         
         while True: 
@@ -146,18 +159,17 @@ class BlackJack(CardGame):
                 self.player_bank += self.initial_bet * 2.5
                 break
     
-            if self.dealer_hand_total == 21 and self.player_hand_total != 21:
+            elif self.dealer_hand_total == 21 and self.player_hand_total != 21:
                 print("\n>>> Dealer has Natural...You Lose")
                 break
     
-            if self.player_hand_total == 21 and self.dealer_hand_total == 21:
+            elif self.player_hand_total == 21 and self.dealer_hand_total == 21:
                 print("\n>>> Both have Natural...Its a Draw")
                 self.player_bank += self.initial_bet
                 break
     
-            else:
-                self.define_winner()
-                break
+            self.define_winner()
+            break
 
     
     def dealers_move(self):
