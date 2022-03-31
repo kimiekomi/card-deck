@@ -4,7 +4,7 @@ from playing_card import *
 from card_deck import *
 import random
 
-debug = False
+debug = True
 trace = False
 
 class CardGame:
@@ -16,12 +16,15 @@ class CardGame:
         if trace: print(f"shuffled_deck({len(self.deck)}): {self.deck}")
 
 
-class Player:
+class Player(CardGame):
     def __init__(self):
+        super().__init__()
+        
         self.hand = []
         self.hand_total = 0
-        # self.purse = ""
-        # self.wager = ""
+        
+        # self.purse = 
+        # self.wager = 
 
 
     def __repr__(self):
@@ -31,14 +34,9 @@ class Player:
     def hit(self):
         if debug: print("called hit()")
 
-        hit_card = self.deck.get_card()
-        self.hand.append(hit_card)
-        self.hand_total += hit_card.value
+        self.hit_card = self.deck.get_card()
+        self.hand.append(self.hit_card)
 
-        if hit_card.rank == Ace and self.hand_total > 21:
-            self.hand_total -= 10
-
-        
 
 class Human(Player):
     def __init__(self):
@@ -57,7 +55,9 @@ if __name__ == "__main__":
     player = Player()
     print(player)
 
-    
+    player.hit()
+    player.hit()
+    print(player.hand)
 
     # human = Human()
     # print(player)
