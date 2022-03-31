@@ -4,7 +4,7 @@ from playing_card import *
 from card_deck import *
 import random
 
-debug = True
+debug = False
 trace = False
 
 class CardGame:

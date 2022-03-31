@@ -5,8 +5,8 @@ from card_deck import *
 from card_game import *
 import os
 
-debug = True
-trace = True
+debug = False
+trace = False
 
 class BlackJack(CardGame):
 
@@ -41,7 +41,7 @@ class BlackJack(CardGame):
 
             if trace: print(f"player hand({len(self.player.hand)}), dealer hand({len(self.dealer.hand)})\nplayer total: {self.player_hand_total}, dealer total: {self.dealer_hand_total}")
                 
-            print(f"Player Bank: ${self.player_bank}\n")
+            print(f"\nPlayer Bank: ${self.player_bank}\n")
             
             try:
                 self.initial_bet = int(input("Enter initial bet: $ ") or 10)
@@ -116,23 +116,12 @@ class BlackJack(CardGame):
             another_round = input("\nAnother Round? ").lower()
     
             if another_round[0] != "y":
-                print("\nGoodbye...\n")
+                print("\n>>> Goodbye...\n")
                 break
 
             os.system("clear")
 
             
-    # def hit(self):
-    #     if debug: print("called hit()")
-
-    #     hit_card = self.deck.get_card()
-    #     self.player_hand.append(hit_card)
-    #     self.player_hand_total += hit_card.value
-
-    #     if hit_card.rank == Ace and self.player_hand_total > 21:
-    #         self.player_hand_total -= 10
-
-
     # def split(self):
     #     pass
 
