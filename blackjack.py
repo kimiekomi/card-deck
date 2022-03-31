@@ -75,10 +75,12 @@ class BlackJack(CardGame):
             print(f"player hand total: {self.player_hand_total}") 
             if trace: print(f"dealer hand total: '{self.dealer_hand_total}'")
             print(f"dealer card2 value: {self.dealer_hand[1].value}") 
-    
+
             first_move = input("\nEnter first move: ").lower()
-    
-            if first_move[0] != "h":
+
+            if first_move != "h":
+                if trace: print("player elected to 'stand'")
+                    
                 self.natural()
 
             else:
@@ -87,10 +89,10 @@ class BlackJack(CardGame):
         
                     if self.player_hand_total > 21: 
                         break
-                                
-                    player_options = input("\nEnter next move: ").lower()
                     
-                    if player_options[0] == "h":
+                    player_options = input("\nEnter next move: ").lower()
+
+                    if player_options == "h":
                         continue
         
                     # elif player_options[0] == "s":
@@ -98,6 +100,8 @@ class BlackJack(CardGame):
             
                     # elif player_options[0] == "d":
                     #     self.double()
+
+                    if trace: print("player elected to 'stand'")
     
                     print(f"dealer hand revealed: {self.dealer_hand}")
     
